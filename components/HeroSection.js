@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ParticlesBg from './ParticlesBg';
 
+
 import {
   SiVuedotjs,
   SiTypescript,
@@ -65,17 +66,9 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
-  const icons = useMemo(
-    () => [
-      <SiVuedotjs size={30} />,
-      <SiTypescript size={30} />,
-      <SiJavascript size={30} />,
-      <SiReact size={30} />,
-      <SiNextdotjs size={30} />,
-      <SiFigma size={30} />,
-    ],
-    []
-  );
+ const iconComponents = [SiVuedotjs, SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiFigma];
+const icons = useMemo(() => iconComponents.map((Icon) => <Icon size={30} />), []);
+
 
   const positions = [
     'top-2/3 left-10',
@@ -112,10 +105,11 @@ export default function HeroSection() {
 
   useEffect(() => {
     const shuffledPositions = shuffleArray(positions);
-    const randomizedIcons = icons.map((icon, index) => ({
-      icon,
-      style: shuffledPositions[index],
-    }));
+   const randomizedIcons = icons.slice(0, positions.length).map((icon, index) => ({
+  icon,
+  style: shuffledPositions[index],
+}));
+
     setFloatingIcons(randomizedIcons);
   }, []);
   
