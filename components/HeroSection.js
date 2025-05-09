@@ -171,7 +171,7 @@ const icons = useMemo(() => iconComponents.map((Icon) => <Icon size={30} />), []
      <div className="w-full md:w-1/2 flex justify-center md:justify-end">
   <div className="w-74 h-74 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden shadow-lg border-4 border-gray-300">
     <img
-      src="/akosismile.jpg"
+      src="/akosismile.JPG"
       alt="Profile"
       className="w-full h-full object-cover"
     />
