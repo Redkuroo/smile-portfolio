@@ -3,6 +3,9 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ParticlesBg from './ParticlesBg';
+import Image from 'next/image';
+
+
 
 
 import {
@@ -55,63 +58,74 @@ export default function HeroSection() {
   const [isChanging, setIsChanging] = useState(false);
 
   // Handle title transition
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsChanging(true);
-      setTimeout(() => {
-        setTitleIndex((prev) => (prev + 1) % titles.length);
-        setIsChanging(false);
-      }, 500);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
+ const titleCount = titles.length;
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setIsChanging(true);
+    setTimeout(() => {
+      setTitleIndex((prev) => (prev + 1) % titleCount);
+      setIsChanging(false);
+    }, 500);
+  }, 2000);
+  return () => clearInterval(interval);
+}, [titleCount]);
+
 
  const iconComponents = [SiVuedotjs, SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiFigma];
-const icons = useMemo(() => iconComponents.map((Icon) => <Icon size={30} />), []);
+const icons = useMemo(() => {
+  const iconComponents = [SiVuedotjs, SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiFigma];
+  return iconComponents.map((Icon, index) => <Icon key={index} size={30} />);
+}, []);
 
 
-  const positions = [
-    'top-2/3 left-10',
-    'bottom-10 right-1/4',
-    'top-12 right-12',
-    'bottom-1/4 left-20',
-    'top-1/4 right-1/3',
-    'top-1/2 right-1/1',
-    'top-5 left-5',
-    'top-10 right-10',
-    'top-1/2 left-1/3',
-    'bottom-1/3 right-8',
-    'bottom-5 left-16',
-    'top-6 right-24',
-    'bottom-20 left-10',
-    'top-1/3 right-1/4',
-    'bottom-12 right-2',
-    'top-3 left-20',
-    'top-1/4 left-1/2',
-    'bottom-1/2 right-1/2',
-    'top-14 right-1/5',
-    'bottom-8 left-1/3',
-    'top-1/6 right-10',
-    'top-1/5 left-8',
-    'bottom-3 right-14',
-    'top-10 left-1/6',
-    'bottom-1/5 right-1/3',
-    'top-2 right-6',
-  ];
+
+
+
+  const positions = useMemo(() => [
+  'top-2/3 left-10',
+  'bottom-10 right-1/4',
+  'top-12 right-12',
+  'bottom-1/4 left-20',
+  'top-1/4 right-1/3',
+  'top-1/2 right-1/1',
+  'top-5 left-5',
+  'top-10 right-10',
+  'top-1/2 left-1/3',
+  'bottom-1/3 right-8',
+  'bottom-5 left-16',
+  'top-6 right-24',
+  'bottom-20 left-10',
+  'top-1/3 right-1/4',
+  'bottom-12 right-2',
+  'top-3 left-20',
+  'top-1/4 left-1/2',
+  'bottom-1/2 right-1/2',
+  'top-14 right-1/5',
+  'bottom-8 left-1/3',
+  'top-1/6 right-10',
+  'top-1/5 left-8',
+  'bottom-3 right-14',
+  'top-10 left-1/6',
+  'bottom-1/5 right-1/3',
+  'top-2 right-6',
+], []);
+
   
 
   // Randomize icons with positions per render
   const [floatingIcons, setFloatingIcons] = useState([]);
 
-  useEffect(() => {
-    const shuffledPositions = shuffleArray(positions);
-   const randomizedIcons = icons.slice(0, positions.length).map((icon, index) => ({
-  icon,
-  style: shuffledPositions[index],
-}));
+useEffect(() => {
+  const shuffledPositions = shuffleArray(positions);
+  const randomizedIcons = icons.slice(0, positions.length).map((icon, index) => ({
+    icon,
+    style: shuffledPositions[index],
+  }));
 
-    setFloatingIcons(randomizedIcons);
-  }, []);
+  setFloatingIcons(randomizedIcons);
+}, [icons, positions]);
+
   
 
   return (
@@ -170,10 +184,12 @@ const icons = useMemo(() => iconComponents.map((Icon) => <Icon size={30} />), []
      {/* Image Section */}
      <div className="w-full md:w-1/2 flex justify-center md:justify-end">
   <div className="w-74 h-74 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden shadow-lg border-4 border-gray-300">
-    <img
+    <Image
       src="/akosismile.JPG"
       alt="Profile"
       className="w-full h-full object-cover"
+      height={200}
+      width={200}
     />
   </div>
 </div>
