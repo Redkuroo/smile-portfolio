@@ -23,7 +23,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-2xl font-extrabold bg-gradient-to-r from-red-600 via-red-500 to-red-800 bg-clip-text text-transparent tracking-tight hover:scale-105 transition-transform">
-            John Smile Mella
+            Logo
           </Link>
 
           {/* Desktop Nav */}
