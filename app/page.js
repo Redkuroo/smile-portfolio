@@ -2,6 +2,7 @@
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import SocialSidebar from '../components/SocialSideBar';
+import Portfoliohighlights from '../components/Portfoliohighlights';
 
 export default function Home() {
   return (
@@ -21,21 +22,9 @@ export default function Home() {
           <HeroSection />
 
           {/* About Section */}
-          <section id="about" className="max-w-2xl w-full bg-white p-6 mt-8 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">About Me</h2>
-            <p className="text-gray-600 mb-4">
-I&apos;m a passionate developer with experience in building modern web applications using React and Next.js. I love crafting clean and user-friendly interfaces.
-            </p>
+          <section id="about" className="max-w-9xl w-full bg-white p-6 mt-8 rounded-lg shadow-md">
+          <Portfoliohighlights />
 
-            {/* Projects */}
-            <section id="projects" className="mt-8">
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">Projects</h2>
-              <ul className="list-disc pl-5 text-gray-600">
-                <li>Portfolio Website</li>
-                <li>Task Manager App</li>
-                <li>E-commerce Store</li>
-              </ul>
-            </section>
           </section>
 
           {/* Footer */}

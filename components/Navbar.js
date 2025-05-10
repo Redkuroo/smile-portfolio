@@ -30,7 +30,7 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            {["about", "projects", "skills", "contact"].map((item) => (
+            {["profile", "about", "portfolio", "contact"].map((item) => (
               <NavLink key={item} href={`#${item}`} text={item.charAt(0).toUpperCase() + item.slice(1)} current={pathname.includes(item)} />
             ))}
             <a

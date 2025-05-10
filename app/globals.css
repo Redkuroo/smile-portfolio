@@ -76,3 +76,18 @@ body {
   }
 }
 
+/* styles/globals.css or any imported CSS */
+.scrollbar-custom::-webkit-scrollbar {
+  height: 8px;
+}
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+  
