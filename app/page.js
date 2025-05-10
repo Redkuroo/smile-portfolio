@@ -24,7 +24,7 @@ export default function Home() {
           <section id="about" className="max-w-2xl w-full bg-white p-6 mt-8 rounded-lg shadow-md">
             <h2 className="text-2xl font-semibold text-gray-700 mb-4">About Me</h2>
             <p className="text-gray-600 mb-4">
-              I&rsquo;m a passionate developer with experience in building modern web applications using React and Next.js. I love crafting clean and user-friendly interfaces.
+I&apos;m a passionate developer with experience in building modern web applications using React and Next.js. I love crafting clean and user-friendly interfaces.
             </p>
 
             {/* Projects */}

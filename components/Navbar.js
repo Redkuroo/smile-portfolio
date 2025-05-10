@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,10 +21,11 @@ export default function Navbar() {
     <nav className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
       scrolled ? 'bg-white/80 backdrop-blur-md shadow-lg ' : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-2xl font-extrabold bg-gradient-to-r from-red-600 via-red-500 to-red-800 bg-clip-text text-transparent tracking-tight hover:scale-105 transition-transform">
             Logo
+            My Logo
           </Link>
 
           {/* Desktop Nav */}
