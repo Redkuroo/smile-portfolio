@@ -1,9 +1,21 @@
 'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaInfoCircle, FaReact, FaNodeJs, FaSass, FaDatabase } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiTypescript } from 'react-icons/si';
+import {
+  FaInfoCircle,
+  FaReact,
+  FaNodeJs,
+  FaSass,
+  FaDatabase,
+} from 'react-icons/fa';
+import {
+  SiNextdotjs,
+  SiTailwindcss,
+  SiTypescript,
+} from 'react-icons/si';
 import Image from 'next/image';
+import ParticlesBg from './ParticlesBg'; 
+
 
 const projects = [
   {
@@ -12,7 +24,7 @@ const projects = [
     cover: '/rest-countries-cover.png',
     url: 'https://rest-countries-demo.example.com',
     description:
-      'A frontend application that fetches and displays information about countries using REST APIs. Users can search, filter, and view detailed info including population, region, and borders.',
+      'A frontend app that fetches and displays country info using REST APIs.',
     techStack: [FaReact, SiTailwindcss, FaSass],
   },
   {
@@ -21,7 +33,7 @@ const projects = [
     cover: '/dashboard-cover.png',
     url: 'https://dashboard-ui.example.com',
     description:
-      'An admin dashboard template with responsive charts, user management, and light/dark theme toggle. Built with modern design and component-driven development.',
+      'Admin dashboard template with charts and theme toggling.',
     techStack: [SiNextdotjs, FaDatabase, FaNodeJs],
   },
   {
@@ -30,17 +42,17 @@ const projects = [
     cover: '/ecommerce-cover.png',
     url: 'https://ecommerce-app.example.com',
     description:
-      'A mock e-commerce platform showcasing product listings, shopping cart functionality, and category filters. Integrated with Stripe for payments (in dev mode).',
+      'Mock e-commerce store with filters and shopping cart.',
     techStack: [FaReact, SiTailwindcss, SiTypescript],
   },
   {
     id: 4,
-    title: 'Portfolio Site',
-    cover: '/portfolio-cover.png',
-    url: 'https://portfolio.example.com',
+    title: 'E-Commerce App',
+    cover: '/ecommerce-cover.png',
+    url: 'https://ecommerce-app.example.com',
     description:
-      'My personal developer portfolio showcasing web projects, design process, and contact form integration. Fully responsive and built with modern tools.',
-    techStack: [SiNextdotjs, SiTailwindcss],
+      'Mock e-commerce store with filters and shopping cart.',
+    techStack: [FaReact, SiTailwindcss, SiTypescript],
   },
 ];
 
@@ -48,97 +60,118 @@ export default function PortfolioHighlights() {
   const [activeProject, setActiveProject] = useState(null);
 
   return (
-    <section className="py-20 bg-[#121212] text-white">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center tracking-wide">
+  <section className="relative py-6 text-black overflow-hidden min-h-[80vh]">
+
+
+  <ParticlesBg />
+
+
+      <div className="relative z-10 container mx-auto px-4 max-w-6xl">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center tracking-tight">
           Portfolio Highlights
         </h2>
 
-        <div className="flex space-x-6 overflow-x-auto pb-4 scrollbar-custom">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="relative min-w-[300px] md:min-w-[400px] bg-[#1e1e1e] rounded-2xl shadow-lg p-4 flex-shrink-0 border border-[#333] hover:scale-[1.02] transition-transform duration-300"
-            >
-              <div className="rounded-xl overflow-hidden">
+        {/* Scrollable Project Grid */}
+   <div className="overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+  <div className="flex gap-6 min-w-full w-max px-1">
+
+
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden group transition hover:shadow-xl hover:-translate-y-1 duration-300"
+
+              >
                 <Image
                   src={project.cover}
                   alt={project.title}
-                  className="rounded-md w-full h-auto object-cover max-h-[220px]"
-                  width={500}
-                  height={300}
+                  width={400}
+                  height={200}
+                  className="object-cover w-full h-40"
                   priority
                 />
-              </div>
 
-              <div className="mt-4 flex items-center justify-between">
-                <span className="text-white text-lg font-semibold">{project.title}</span>
-                <button
-  onClick={() =>
-    setActiveProject(activeProject === project.id ? null : project.id)
-  }
-  className="bg-gradient-to-tr from-[#e53935] to-[#ff6f61] p-2 rounded-full hover:scale-105 transition-all duration-300 shadow-md focus:outline-none"
-  aria-label="More info"
-  aria-expanded={activeProject === project.id}
->
-  <FaInfoCircle size={18} />
-</button>
-
-              </div>
-
-              <AnimatePresence>
-                {activeProject === project.id && (
-                  <motion.div
-                    initial={{ y: '100%' }}
-                    animate={{ y: 0 }}
-                    exit={{ y: '100%' }}
-                    transition={{ duration: 0.6, ease: 'easeInOut' }}
-                    className="absolute inset-0 bg-[#1f1f1f]/95 backdrop-blur-lg rounded-2xl z-30 flex flex-col text-white overflow-hidden"
-                  >
-                    <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                <div className="p-5">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold tracking-wide">
+                      {project.title}
+                    </h3>
                     <button
+                      onClick={() =>
+                        setActiveProject(
+                          activeProject === project.id ? null : project.id
+                        )
+                      }
+                      className="bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition cursor-pointer"
+                      aria-label="More info"
+                    >
+                      <FaInfoCircle size={16} />
+                    </button>
+                  </div>
+                </div>
+
+                <AnimatePresence>
+                  {activeProject === project.id && (
+                    <motion.div
+                      initial={{ y: '100%' }}
+                      animate={{ y: 0 }}
+                      exit={{ y: '100%' }}
+                      transition={{ duration: 0.4 }}
+                      className="absolute inset-0 bg-white/95 backdrop-blur-md border border-gray-300 rounded-2xl z-30 flex flex-col p-6 text-sm shadow-lg"
+                    >
+                  <button
   onClick={() => setActiveProject(null)}
-  className="absolute top-4 right-4 bg-gradient-to-tr from-[#e53935] to-[#ff6f61] hover:scale-110 text-white p-2 rounded-full shadow-md transition-all duration-300"
+  className="absolute top-2.5 right-2.5 p-1.5 rounded-full cursor-pointer hover:scale-110 transition"
   aria-label="Close project details"
 >
   ✕
 </button>
 
 
-                      <div>
-                        <h4 className="text-xl font-semibold mb-2">Project Description</h4>
-                        <p className="text-sm text-gray-300 leading-relaxed">
-                          {project.description}
-                        </p>
-                      </div>
 
-                      <div>
-                        <h4 className="text-xl font-semibold mb-2">Tech Stack</h4>
-                        <div className="flex gap-4 text-2xl">
-                          {project.techStack.map((Icon, i) => (
-                            <Icon key={i} className="text-white" />
-                          ))}
+                      {/* Scrollable project details */}
+                      <div className="overflow-y-auto mt-8 space-y-5 max-h-[80%] pr-2">
+                        <div>
+                          <h4 className="text-base font-semibold mb-1">
+                            Description
+                          </h4>
+                          <p className="text-gray-600 leading-relaxed">
+                            {project.description}
+                          </p>
                         </div>
+
+                        <div>
+                          <h4 className="text-base font-semibold mb-1">
+                            Tech Stack
+                          </h4>
+                          <div className="flex gap-4 overflow-x-auto text-2xl text-gray-700 pb-2">
+                            {project.techStack.map((Icon, i) => (
+                              <Icon
+                                key={i}
+                                className="hover:text-red-500 transition flex-shrink-0"
+                              />
+                            ))}
+                          </div>
+                        </div>
+
+                        <a
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block px-5 py-2 text-sm rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition text-white font-semibold text-center shadow"
+                        >
+                          View Project
+                        </a>
                       </div>
-
-                      <a
-  href={project.url}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-block mt-4 px-6 py-3 rounded-full bg-gradient-to-r from-[#e53935] to-[#ff6f61] hover:scale-105 transition-all duration-300 text-white font-semibold shadow-md"
->
-  View Page
-</a>
-
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

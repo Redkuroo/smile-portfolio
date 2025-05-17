@@ -1,4 +1,3 @@
-// components/ParticlesBackground.jsx
 'use client';
 import { useCallback } from 'react';
 import Particles from 'react-tsparticles';
@@ -6,6 +5,7 @@ import { loadSlim } from 'tsparticles-slim';
 
 export default function ParticlesBackground() {
   const particlesInit = useCallback(async (engine) => {
+    console.log('Particles engine:', engine);
     await loadSlim(engine);
   }, []);
 
@@ -13,7 +13,7 @@ export default function ParticlesBackground() {
     <Particles
       id="tsparticles"
       init={particlesInit}
-      className="absolute inset-0 z-0"
+      className="absolute inset-0 w-full h-full z-0 pointer-events-none"
       options={{
         fullScreen: false,
         background: {
@@ -33,7 +33,7 @@ export default function ParticlesBackground() {
           modes: {
             grab: {
               distance: 140,
-              line_linked: {
+              links: {
                 opacity: 0.5,
               },
             },
@@ -50,15 +50,11 @@ export default function ParticlesBackground() {
             opacity: 0.3,
             width: 1,
           },
-          collisions: {
-            enable: false,
-          },
           move: {
-            direction: 'none',
             enable: true,
-            outModes: 'bounce',
-            random: false,
             speed: 1,
+            direction: 'none',
+            outModes: 'bounce',
             straight: false,
           },
           number: {
