@@ -13,9 +13,9 @@ export default function ParticlesBackground() {
     <Particles
       id="tsparticles"
       init={particlesInit}
-      className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+      className="absolute inset-0 w-full h-full z-0 pointer-events-none bg"
       options={{
-        fullScreen: false,
+        fullScreen: true,
         background: {
           color: {
             value: 'transparent',
@@ -27,6 +27,7 @@ export default function ParticlesBackground() {
             onHover: {
               enable: true,
               mode: 'grab',
+
             },
             resize: true,
           },
@@ -52,7 +53,7 @@ export default function ParticlesBackground() {
           },
           move: {
             enable: true,
-            speed: 1,
+            speed: 0.5,
             direction: 'none',
             outModes: 'bounce',
             straight: false,
@@ -61,7 +62,7 @@ export default function ParticlesBackground() {
             value: 60,
             density: {
               enable: true,
-              area: 800,
+              area: 900,
             },
           },
           opacity: {
