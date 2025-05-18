@@ -55,7 +55,32 @@ const projects = [
     techStack: [FaReact, SiTailwindcss, SiTypescript],
   },
 ];
+const BurstLetter = ({ char, index }) => {
+  const [isBursting, setIsBursting] = useState(false);
 
+  return (
+    <span
+      className={`inline-block ${isBursting ? 'animate-burst' : ''}`}
+      onMouseEnter={() => {
+        setIsBursting(true);
+        setTimeout(() => setIsBursting(false), 1000);
+      }}
+      style={{ animationDelay: `${index * 50}ms` }}
+    >
+      {char === ' ' ? '\u00A0' : char}
+    </span>
+  );
+};
+
+const BurstText = ({ text }) => (
+  <span className="cursor-pointer">
+    {text.split('').map((char, index) => (
+      <BurstLetter key={index} char={char} index={index} />
+    ))}
+  </span>
+
+
+);
 export default function PortfolioHighlights() {
   const [activeProject, setActiveProject] = useState(null);
 
@@ -65,7 +90,7 @@ export default function PortfolioHighlights() {
 
       <div className="relative z-10 container mx-auto px-4 max-w-6xl">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-center tracking-tight">
-          Portfolio Highlights
+      <BurstText text="Portfolio Highlights" />
         </h2>
 
         {/* Scrollable Project Grid */}
@@ -78,16 +103,17 @@ export default function PortfolioHighlights() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="flex-shrink-0 w-72 sm:w-80 bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition duration-300 relative"
+                className="flex-shrink-0 w-64 sm:w-72 md:w-80 lg:w-96 bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition duration-300 relative"
+
               >
-                <Image
-                  src={project.cover}
-                  alt={project.title}
-                  width={400}
-                  height={200}
-                  className="object-cover w-full h-40"
-                  priority
-                />
+               <Image
+  src={project.cover}
+  alt={project.title}
+  width={400}
+  height={200}
+  className="object-cover w-full h-36 sm:h-40 md:h-44 lg:h-48"
+/>
+
 
                 <div className="p-4 sm:p-5">
                   <div className="flex items-center justify-between">
