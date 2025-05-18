@@ -126,7 +126,7 @@ export default function PortfolioHighlights() {
                           activeProject === project.id ? null : project.id
                         )
                       }
-                      className="bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition"
+                      className="bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition cursor-pointer"
                       aria-label="More info"
                     >
                       <FaInfoCircle size={16} />

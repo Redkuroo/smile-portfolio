@@ -30,15 +30,21 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            {["profile", "about", "portfolio", "contact"].map((item) => (
-              <NavLink key={item} href={`#${item}`} text={item.charAt(0).toUpperCase() + item.slice(1)} current={pathname.includes(item)} />
-            ))}
+            {[
+  { text: "Profile", href: "/#profile" },
+  { text: "About", href: "/about" }, // This is a separate page now
+  { text: "Portfolio", href: "#portfolio" },
+  { text: "Contact", href: "#contact" },
+].map(({ text, href }) => (
+  <NavLink key={text} href={href} text={text} current={pathname === href || pathname === `/${text.toLowerCase()}`} />
+))
+}
             <a
               href="/cv.pdf"
               download
               className="bg-gradient-to-r from-red-600 via-red-500 to-red-800 text-white font-bold rounded-full py-2 px-6 shadow-lg hover:scale-105 transition-all duration-300"
             >
-              Download CV
+              Download Resume
             </a>
           </div>
 
@@ -62,14 +68,15 @@ export default function Navbar() {
       {/* Mobile Nav */}
       <div className={`md:hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-screen' : 'max-h-0 overflow-hidden'}`}>
         <div className="bg-white/90 backdrop-blur-md shadow-md rounded-b-xl mx-4 p-4 space-y-4">
-          {["about", "projects", "skills", "contact"].map((item) => (
-            <MobileNavLink
-              key={item}
-              href={`#${item}`}
-              text={item.charAt(0).toUpperCase() + item.slice(1)}
-              onClick={() => setMobileMenuOpen(false)}
-            />
-          ))}
+          {[
+  { text: "Profile", href: "#profile" },
+  { text: "About", href: "/about" },
+  { text: "Portfolio", href: "#portfolio" },
+  { text: "Contact", href: "#contact" },
+].map(({ text, href }) => (
+  <MobileNavLink key={text} href={href} text={text} onClick={() => setMobileMenuOpen(false)} />
+))
+}
           <a
             href="/cv.pdf"
             download
