@@ -3,19 +3,8 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ParticlesBg from './ParticlesBg';
+import HeroFloatingIcons from './heroFloatingIcons';
 import Image from 'next/image';
-
-
-
-
-import {
-  SiVuedotjs,
-  SiTypescript,
-  SiJavascript,
-  SiReact,
-  SiNextdotjs,
-  SiFigma,
-} from 'react-icons/si';
 
 // Utility: Shuffle function
 const shuffleArray = (array) => {
@@ -72,79 +61,14 @@ useEffect(() => {
 }, [titleCount]);
 
 
- const iconComponents = [SiVuedotjs, SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiFigma];
-const icons = useMemo(() => {
-  const iconComponents = [SiVuedotjs, SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiFigma];
-  return iconComponents.map((Icon, index) => <Icon key={index} size={30} />);
-}, []);
 
 
-
-
-
-  const positions = useMemo(() => [
-  'top-2/3 left-10',
-  'bottom-10 right-1/4',
-  'top-12 right-12',
-  'bottom-1/4 left-20',
-  'top-1/4 right-1/3',
-  'top-1/2 right-1/1',
-  'top-5 left-5',
-  'top-10 right-10',
-  'top-1/2 left-1/3',
-  'bottom-1/3 right-8',
-  'bottom-5 left-16',
-  'top-6 right-24',
-  'bottom-20 left-10',
-  'top-1/3 right-1/4',
-  'bottom-12 right-2',
-  'top-3 left-20',
-  'top-1/4 left-1/2',
-  'bottom-1/2 right-1/2',
-  'top-14 right-1/5',
-  'bottom-8 left-1/3',
-  'top-1/6 right-10',
-  'top-1/5 left-8',
-  'bottom-3 right-14',
-  'top-10 left-1/6',
-  'bottom-1/5 right-1/3',
-  'top-2 right-6',
-], []);
-
-  
-
-  // Randomize icons with positions per render
-  const [floatingIcons, setFloatingIcons] = useState([]);
-
-useEffect(() => {
-  const shuffledPositions = shuffleArray(positions);
-  const randomizedIcons = icons.slice(0, positions.length).map((icon, index) => ({
-    icon,
-    style: shuffledPositions[index],
-  }));
-
-  setFloatingIcons(randomizedIcons);
-}, [icons, positions]);
-
-  
 
   return (
     <section className="min-h-screen flex items-center relative overflow-hidden py-16 md:py-24 lg:py-32">
             <ParticlesBg />
       {/* Floating Icons */}
-      {floatingIcons.map((item, idx) => (
-  <motion.div
-    key={idx}
-    className={`absolute text-gray-400 z-0 ${item.style}`}
-    initial={{ y: 0 }}
-    animate={{ y: [0, -15, 0] }}
-    transition={{ duration: 4 + idx, repeat: Infinity, ease: 'easeInOut' }}
-  >
-    <div className="bg-white rounded-full p-2 shadow-md hover:scale-110 hover:text-red-600 transition duration-300">
-      {item.icon}
-    </div>
-  </motion.div>
-))}
+      <HeroFloatingIcons />
 
 
 

@@ -33,8 +33,8 @@ export default function Navbar() {
             {[
   { text: "Profile", href: "/#profile" },
   { text: "About", href: "/about" }, // This is a separate page now
-  { text: "Portfolio", href: "#portfolio" },
-  { text: "Contact", href: "#contact" },
+  { text: "Portfolio", href: "/#portfolio" },
+  { text: "Contact", href: "/#contact" },
 ].map(({ text, href }) => (
   <NavLink key={text} href={href} text={text} current={pathname === href || pathname === `/${text.toLowerCase()}`} />
 ))
@@ -69,10 +69,10 @@ export default function Navbar() {
       <div className={`md:hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-screen' : 'max-h-0 overflow-hidden'}`}>
         <div className="bg-white/90 backdrop-blur-md shadow-md rounded-b-xl mx-4 p-4 space-y-4">
           {[
-  { text: "Profile", href: "#profile" },
-  { text: "About", href: "/about" },
-  { text: "Portfolio", href: "#portfolio" },
-  { text: "Contact", href: "#contact" },
+  { text: "Profile", href: "/#profile" },
+  { text: "About", href: "/#about" },
+  { text: "Portfolio", href: "/#portfolio" },
+  { text: "Contact", href: "/#contact" },
 ].map(({ text, href }) => (
   <MobileNavLink key={text} href={href} text={text} onClick={() => setMobileMenuOpen(false)} />
 ))
