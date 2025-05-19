@@ -69,15 +69,18 @@ export default function FloatingEffects() {
     };
   }, []);
 
+  const baseIconStyle =
+    'bg-white rounded-full w-14 h-14 p2 shadow-md  flex items-center justify-center transition duration-300';
+
   return (
     <>
       <ParticlesBg />
 
       {/* Floating Icons */}
-      <div className="fixed inset-0 z-[-10] pointer-events-none overflow-hidden">
+      <div className="fixed inset-0 z-10 overflow-hidden">
         {!rearranged && iconPositions.length > 0 && (
           <div className="w-full h-full relative">
-            {iconComponents.map(({ Icon, color }, idx) => (
+            {iconComponents.map(({ Icon }, idx) => (
               <motion.div
                 key={idx}
                 layoutId={`icon-${idx}`}
@@ -91,8 +94,7 @@ export default function FloatingEffects() {
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               >
                 <div
-                  className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center"
-                  style={{ color: color }}
+                  className="bg-white rounded-full w-14 h-14 p2 shadow-md flex items-center justify-center text-gray-400 transition duration-300"
                 >
                   <Icon size={28} />
                 </div>
@@ -106,7 +108,7 @@ export default function FloatingEffects() {
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
         <div
           ref={skillsRef}
-          className="grid grid-cols-3 gap-6 mt-12"
+          className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-12"
         >
           {iconComponents.map(({ Icon, color }, idx) => (
             <motion.div
@@ -118,8 +120,8 @@ export default function FloatingEffects() {
               {rearranged && (
                 <motion.div
                   layoutId={`icon-${idx}`}
-                  className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center"
-                  style={{ color: color }}
+                  className={baseIconStyle}
+                  style={{ color }}
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 >
                   <Icon size={28} />
@@ -136,7 +138,9 @@ export default function FloatingEffects() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <h2 className="text-3xl font-bold mb-4 text-gray-800">Skills & Experience</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">
+              Skills & Experience
+            </h2>
             <p className="text-gray-600">
               Gained experience and successfully shipped solutions using the following technologies.
             </p>

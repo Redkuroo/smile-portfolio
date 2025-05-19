@@ -59,7 +59,7 @@ export default function FloatingEffects() {
           animate={{ y: [0, -15, 0] }}
           transition={{ duration: 4 + idx, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <div className="bg-white rounded-full p-2 shadow-md hover:scale-110 hover:text-red-600 transition duration-300">
+          <div className="bg-white rounded-full w-14 h-14 p2 shadow-md flex items-center justify-center transition duration-300">
             {item.icon}
           </div>
         </motion.div>
