@@ -11,100 +11,133 @@ import {
   SiFigma,
 } from 'react-icons/si';
 
-const shuffleArray = (array) => {
-  const result = [...array];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
+const floatingVariants = {
+  floating: {
+    y: [0, -15, 0],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    },
+  },
+  still: {
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: 'easeInOut',
+    },
+  },
 };
 
 export default function FloatingEffects() {
-  const iconComponents = [SiVuedotjs, SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiFigma];
-  const icons = useMemo(() => iconComponents.map((Icon, index) => ({
-    id: index,
-    icon: <Icon key={index} size={30} />,
-  })), []);
-
-  const positions = useMemo(
+  const iconComponents = useMemo(
     () => [
-      'top-2/3 left-10', 'bottom-10 right-1/4', 'top-12 right-12',
-      'bottom-1/4 left-20', 'top-1/4 right-1/3', 'top-1/2 right-1/1',
+      { Icon: SiVuedotjs, color: '#41b883' },
+      { Icon: SiTypescript, color: '#3178c6' },
+      { Icon: SiJavascript, color: '#f7df1e' },
+      { Icon: SiReact, color: '#61dafb' },
+      { Icon: SiNextdotjs, color: '#000000' },
+      { Icon: SiFigma, color: '#f24e1e' },
     ],
     []
   );
 
   const [rearranged, setRearranged] = useState(false);
-  const [floatingIcons, setFloatingIcons] = useState([]);
+  const [iconPositions, setIconPositions] = useState([]);
   const skillsRef = useRef(null);
 
   useEffect(() => {
-    const shuffled = shuffleArray(positions);
-    const withPosition = icons.map((item, index) => ({
-      ...item,
-      position: shuffled[index] || '',
-    }));
-    setFloatingIcons(withPosition);
-  }, [icons, positions]);
+    setIconPositions(
+      iconComponents.map(() => ({
+        top: Math.random() * 80 + 10,
+        left: Math.random() * 80 + 10,
+      }))
+    );
+  }, [iconComponents]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setRearranged(true);
+        setRearranged(entry.isIntersecting);
       },
       { threshold: 0.5 }
     );
-    if (skillsRef.current) observer.observe(skillsRef.current);
-    return () => observer.disconnect();
+    const ref = skillsRef.current;
+    if (ref) observer.observe(ref);
+    return () => {
+      if (ref) observer.unobserve(ref);
+    };
   }, []);
 
   return (
     <>
       <ParticlesBg />
 
-      <div ref={skillsRef} className="relative w-full min-h-screen flex items-center justify-center p-8">
-        <div className="relative w-full h-full flex flex-wrap items-center justify-center gap-6">
-          {floatingIcons.map((item, idx) => (
+      {/* Floating Icons */}
+      <div className="fixed inset-0 z-[-10] pointer-events-none overflow-hidden">
+        {!rearranged && iconPositions.length > 0 && (
+          <div className="w-full h-full relative">
+            {iconComponents.map(({ Icon, color }, idx) => (
+              <motion.div
+                key={idx}
+                layoutId={`icon-${idx}`}
+                className="absolute"
+                style={{
+                  top: `${iconPositions[idx].top}%`,
+                  left: `${iconPositions[idx].left}%`,
+                }}
+                variants={floatingVariants}
+                animate="floating"
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              >
+                <div
+                  className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center"
+                  style={{ color: color }}
+                >
+                  <Icon size={28} />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Target Grid with Cards */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
+        <div
+          ref={skillsRef}
+          className="grid grid-cols-3 gap-6 mt-12"
+        >
+          {iconComponents.map(({ Icon, color }, idx) => (
             <motion.div
-              key={item.id}
+              key={idx}
+              className="w-20 h-20 rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center relative"
               layout
-              className={
-                rearranged
-                  ? 'relative w-16 h-16 flex justify-center items-center'
-                  : `absolute ${item.position}`
-              }
-              animate={
-                rearranged
-                  ? { y: 0 }
-                  : { y: [0, -15, 0] }
-              }
-              transition={{
-                y: {
-                  duration: rearranged ? 0.8 : 4 + idx * 0.1,
-                  repeat: rearranged ? 0 : Infinity,
-                  ease: 'easeInOut',
-                },
-                layout: { duration: 1, ease: 'easeInOut' },
-              }}
+              transition={{ layout: { duration: 0.8, ease: 'easeInOut' } }}
             >
-              <div className="bg-white rounded-full p-3 shadow-md hover:scale-110 hover:text-red-600 transition duration-300">
-                {item.icon}
-              </div>
+              {rearranged && (
+                <motion.div
+                  layoutId={`icon-${idx}`}
+                  className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center"
+                  style={{ color: color }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                >
+                  <Icon size={28} />
+                </motion.div>
+              )}
             </motion.div>
           ))}
         </div>
 
-        {/* Text section appears beside after rearranged */}
         {rearranged && (
           <motion.div
-            className="absolute bottom-8 md:bottom-auto md:right-16 max-w-md text-left"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+            className="mt-8 text-center max-w-md"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
           >
-            <h2 className="text-2xl font-bold mb-2">Skills & Experience.</h2>
-            <p className="text-gray-700">
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">Skills & Experience</h2>
+            <p className="text-gray-600">
               Gained experience and successfully shipped solutions using the following technologies.
             </p>
           </motion.div>

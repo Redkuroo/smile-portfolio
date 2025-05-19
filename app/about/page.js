@@ -16,8 +16,9 @@ export default function AboutPage() {
         </div>
 
         <main className="flex-1 p-4 lg:pl-32 overflow-y-auto">
-            <section className="w-full p-6 mt-8">
+            <section className="w-full p-6">
             <About />
+ 
           </section>
                  <ParticlesBg />
                 {/* Floating Icons */}

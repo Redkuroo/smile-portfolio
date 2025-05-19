@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section className="py-16 bg-white text-gray-800">
+    <section className="py-16 text-gray-800">
       <div className="container mx-auto px-4 max-w-5xl">
         <motion.h2
           className="text-3xl sm:text-4xl font-bold mb-6 text-center"
@@ -16,7 +16,7 @@ export default function About() {
         </motion.h2>
 
         <motion.p
-          className="text-lg leading-relaxed text-center text-gray-600 max-w-3xl mx-auto"
+          className="text-lg leading-relaxed text-center text-gray-600 max-w-3xl mx-auto z-50"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}

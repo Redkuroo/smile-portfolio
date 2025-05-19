@@ -70,7 +70,7 @@ export default function Navbar() {
         <div className="bg-white/90 backdrop-blur-md shadow-md rounded-b-xl mx-4 p-4 space-y-4">
           {[
   { text: "Profile", href: "/#profile" },
-  { text: "About", href: "/#about" },
+  { text: "About", href: "/about" },
   { text: "Portfolio", href: "/#portfolio" },
   { text: "Contact", href: "/#contact" },
 ].map(({ text, href }) => (
