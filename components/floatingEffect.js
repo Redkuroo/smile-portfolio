@@ -56,59 +56,77 @@ export default function FloatingEffects() {
   }, [iconComponents]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setRearranged(entry.isIntersecting);
-      },
-      { threshold: 0.5 }
-    );
-    const ref = skillsRef.current;
-    if (ref) observer.observe(ref);
-    return () => {
-      if (ref) observer.unobserve(ref);
-    };
-  }, []);
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setRearranged(true);
+      } else {
+        setRearranged(false);
+      }
+    },
+    {
+      threshold: 1,
+    }
+  );
+
+  const ref = skillsRef.current;
+  if (ref) observer.observe(ref);
+  return () => {
+    if (ref) observer.unobserve(ref);
+  };
+}, []);
+
 
   const baseIconStyle =
-    'bg-white rounded-full w-14 h-14 p2 shadow-md  flex items-center justify-center transition duration-300';
+    'bg-white rounded-full w-14 h-14 p-2 shadow-md flex items-center justify-center transition duration-300';
 
   return (
     <>
       <ParticlesBg />
 
       {/* Floating Icons */}
-      <div className="fixed inset-0 z-10 overflow-hidden">
-        {!rearranged && iconPositions.length > 0 && (
-          <div className="w-full h-full relative">
-            {iconComponents.map(({ Icon }, idx) => (
+      <div className="fixed inset-0 z-10 overflow-hidden pointer-events-none">
+        <div className="w-full h-full relative">
+          {iconComponents.map(({ Icon }, idx) => (
+            <motion.div
+              key={idx}
+              layoutId={`icon-${idx}`}
+              className="absolute"
+              style={{
+                top: `${iconPositions[idx]?.top || 0}%`,
+                left: `${iconPositions[idx]?.left || 0}%`,
+              }}
+              variants={floatingVariants}
+              initial={{ opacity: 1 }}
+              animate={
+                rearranged
+                  ? { ...floatingVariants.still, opacity: 1 }
+                  : { ...floatingVariants.floating, opacity: 1 }
+              }
+              transition={{
+                duration: 1,
+                ease: 'easeInOut',
+                delay: idx * 0.05,
+              }}
+            >
               <motion.div
-                key={idx}
-                layoutId={`icon-${idx}`}
-                className="absolute"
-                style={{
-                  top: `${iconPositions[idx].top}%`,
-                  left: `${iconPositions[idx].left}%`,
-                }}
-                variants={floatingVariants}
-                animate="floating"
-                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                className="bg-white rounded-full w-14 h-14 p-2 shadow-md flex items-center justify-center text-gray-400"
+                initial={{ scale: 1 }}
+                animate={{ scale: rearranged ? 0.7 : 1 }}
+                transition={{ duration: 0.5 }}
               >
-                <div
-                  className="bg-white rounded-full w-14 h-14 p2 shadow-md flex items-center justify-center text-gray-400 transition duration-300"
-                >
-                  <Icon size={28} />
-                </div>
+                <Icon size={28} />
               </motion.div>
-            ))}
-          </div>
-        )}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Target Grid with Cards */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
         <div
           ref={skillsRef}
-          className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-12"
+          className="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-12"
         >
           {iconComponents.map(({ Icon, color }, idx) => (
             <motion.div
@@ -122,7 +140,11 @@ export default function FloatingEffects() {
                   layoutId={`icon-${idx}`}
                   className={baseIconStyle}
                   style={{ color }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 30,
+                  }}
                 >
                   <Icon size={28} />
                 </motion.div>

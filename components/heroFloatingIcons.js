@@ -22,7 +22,7 @@ const shuffleArray = (array) => {
 
 export default function FloatingEffects() {
   const iconComponents = [SiVuedotjs, SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiFigma];
-  const icons = useMemo(() => iconComponents.map((Icon, index) => <Icon key={index} size={30} />), []);
+  const icons = useMemo(() => iconComponents.map((Icon, index) => <Icon key={index} size={28} />), []);
 
   const positions = useMemo(() => [
     'top-2/3 left-10', 'bottom-10 right-1/4', 'top-12 right-12',
