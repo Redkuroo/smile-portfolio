@@ -82,7 +82,7 @@ export default function Navbar() {
             download
             className="block text-center w-full bg-gradient-to-r from-red-600 to-gray-900 text-white font-bold py-2 rounded-full shadow"
           >
-            Download CV
+            Download Resume
           </a>
         </div>
       </div>
