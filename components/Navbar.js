@@ -7,15 +7,20 @@ import { usePathname } from 'next/navigation';
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false); // Add mounted state
   const pathname = usePathname();
 
   useEffect(() => {
+    setMounted(true); // Set mounted to true after mount
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent hydration mismatch by not rendering nav until mounted
+  if (!mounted) return null;
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
