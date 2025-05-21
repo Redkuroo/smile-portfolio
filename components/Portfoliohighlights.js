@@ -7,6 +7,8 @@ import {
   FaNodeJs,
   FaSass,
   FaDatabase,
+  FaChevronLeft,
+  FaChevronRight,
 } from 'react-icons/fa';
 import {
   SiNextdotjs,
@@ -83,6 +85,12 @@ const BurstText = ({ text }) => (
 );
 export default function PortfolioHighlights() {
   const [activeProject, setActiveProject] = useState(null);
+  const [mobileIndex, setMobileIndex] = useState(0);
+
+  // Helper for mobile navigation
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  const showLeft = mobileIndex > 0;
+  const showRight = mobileIndex < projects.length - 1;
 
   return (
   <section className="relative py-6 sm:py-8 text-black overflow-hidden min-h-[60vh]">
@@ -92,7 +100,104 @@ export default function PortfolioHighlights() {
       <BurstText text="Portfolio Highlights" />
     </h2>
 
-    <div className="rounded-xl shadow-inner px-2 py-4 sm:px-6 mb-6">
+    {/* Mobile: Arrow navigation, show one project */}
+    <div className="sm:hidden flex items-center justify-center gap-2 mb-6">
+      <button
+        onClick={() => setMobileIndex(i => Math.max(i - 1, 0))}
+        disabled={!showLeft}
+        className={`p-2 rounded-full bg-gray-200 text-gray-600 shadow ${!showLeft ? 'opacity-30 cursor-not-allowed' : 'hover:bg-gray-300'}`}
+        aria-label="Previous project"
+      >
+        <FaChevronLeft size={20} />
+      </button>
+      <motion.div
+        key={projects[mobileIndex].id}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -50 }}
+        transition={{ duration: 0.3 }}
+        className="w-72 max-w-[90vw] bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden group relative"
+      >
+        <Image
+          src={projects[mobileIndex].cover}
+          alt={projects[mobileIndex].title}
+          width={400}
+          height={200}
+          className="object-cover w-full h-36"
+        />
+        <div className="p-5">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold tracking-wide">
+              {projects[mobileIndex].title}
+            </h3>
+            <button
+              onClick={() =>
+                setActiveProject(
+                  activeProject === projects[mobileIndex].id ? null : projects[mobileIndex].id
+                )
+              }
+              className="bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition cursor-pointer"
+              aria-label="More info"
+            >
+              <FaInfoCircle size={16} />
+            </button>
+          </div>
+        </div>
+        {/* Project Details Modal for mobile */}
+        <AnimatePresence>
+          {activeProject === projects[mobileIndex].id && (
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0 bg-white/95 backdrop-blur-md border border-gray-300 rounded-2xl z-30 flex flex-col p-4 text-sm shadow-lg"
+            >
+              <button
+                onClick={() => setActiveProject(null)}
+                className="absolute top-2.5 right-2.5 p-1.5 rounded-full cursor-pointer hover:scale-110 transition"
+                aria-label="Close project details"
+              >
+                ✕
+              </button>
+              <div className="overflow-y-auto mt-10 space-y-5 max-h-[80%] pr-2">
+                <div>
+                  <h4 className="text-base font-semibold mb-1">Description</h4>
+                  <p className="text-gray-600 leading-relaxed">{projects[mobileIndex].description}</p>
+                </div>
+                <div>
+                  <h4 className="text-base font-semibold mb-1">Tech Stack</h4>
+                  <div className="flex gap-4 overflow-x-auto text-2xl text-gray-700 pb-2">
+                    {projects[mobileIndex].techStack.map((Icon, i) => (
+                      <Icon key={i} className="hover:text-red-500 transition flex-shrink-0" />
+                    ))}
+                  </div>
+                </div>
+                <a
+                  href={projects[mobileIndex].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-5 py-2 text-sm rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition text-white font-semibold text-center shadow"
+                >
+                  View Project
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+      <button
+        onClick={() => setMobileIndex(i => Math.min(i + 1, projects.length - 1))}
+        disabled={!showRight}
+        className={`p-2 rounded-full bg-gray-200 text-gray-600 shadow ${!showRight ? 'opacity-30 cursor-not-allowed' : 'hover:bg-gray-300'}`}
+        aria-label="Next project"
+      >
+        <FaChevronRight size={20} />
+      </button>
+    </div>
+
+    {/* Desktop: Horizontal scroll as before */}
+    <div className="hidden sm:block rounded-xl shadow-inner px-2 py-4 sm:px-6 mb-6">
       <div className="overflow-x-auto scrollbar-custom pb-4">
         <div className="flex gap-4 sm:gap-6 min-w-full w-max">
           {projects.map((project, index) => (
@@ -194,8 +299,8 @@ export default function PortfolioHighlights() {
     </section>
   );
 }
-            
-           
-  
 
- 
+
+
+
+
