@@ -1,4 +1,3 @@
-
 'use client';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
@@ -17,17 +16,18 @@ export default function Home() {
           <SocialSidebar />
         </div>
 
-        <main className="flex-1 p-4 lg:pl-32 overflow-y-auto">
+        <main className="flex-1">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <HeroSection />
 
-          <HeroSection />
+            <section id="portfolio" className="w-full p-6 mt-8">
+              <PortfolioHighlights />
+            </section>
 
-          <section id="portfolio" className="w-full p-6 mt-8">
-            <PortfolioHighlights />
-          </section>
-
-             <section id="about" className="w-full p-6 mt-8">
-            <About />
-          </section>
+            <section id="about" className="w-full p-6 mt-8">
+              <About />
+            </section>
+          </div>
         </main>
       </div>
 

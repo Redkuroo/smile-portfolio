@@ -77,7 +77,7 @@ useEffect(() => {
       <div className="container relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-16 flex flex-col-reverse md:flex-row items-center justify-between gap-10">
         {/* Text Content */}
         <div className="w-full md:w-1/2 text-center md:text-left space-y-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight whitespace-nowrap">
             <BurstText text="John Smile Mella" />
           </h1>
 
