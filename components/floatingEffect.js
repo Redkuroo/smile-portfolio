@@ -10,8 +10,10 @@
     SiNextdotjs,
     SiFigma,
   } from 'react-icons/si';
+import Experience from './experience'
 
-  const floatingVariants = {
+
+const floatingVariants = {
     floating: {
       y: [0, -15, 0],
       transition: {
@@ -184,16 +186,31 @@
           )}
         </div>
 
-         <div className="rounded-xl shadow-inner px-2 py-4 sm:px-6 mb-6">
 
-<h2>dsdsdsdsds dsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsds
-  dsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsds
-  dsdsdsdsdsdsdsdsdsdsdsdsdsdsds
-  dsdsdsdsdsdsdsdsdsdsdsdsdsdsds
-  dsdsdsdsdsdsdsdsdsdsdsdsdsdsds
-</h2>
-
-         </div>
+         <div className="hidden sm:block rounded-xl shadow-inner px-2 py-4 sm:px-6 mb-6">
+<div className="mt-20 grid gap-8 grid-cols-1 sm:grid-cols-2">
+  <Experience
+    title="Hububble"
+    date="May, 2021 – Present"
+    role="Junior Front-End Engineer"
+    duties={[
+      'Developed web applications using JavaScript, React, Tailwind, and NextJS.',
+      'Created websites, landing pages, and email templates using HubSpot CMS optimized for various devices.',
+      "Assisted in maintenance and troubleshooting of client websites for performance and satisfaction.",
+    ]}
+  />
+  <Experience
+    title="Upwork"
+    date="October, 2021 – Present"
+    role="Freelance Front-End Engineer"
+    duties={[
+      'Developed and implemented CMS websites using HubSpot.',
+      'Resolved technical issues and improved user experience.',
+      'Achieved top-rated badge for performance and customer satisfaction.',
+    ]}
+  />
+</div>
+</div>
       </>
     );
   }
