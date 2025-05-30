@@ -9,6 +9,7 @@ import {
   FaDatabase,
   FaChevronLeft,
   FaChevronRight,
+  FaFigma,
 } from 'react-icons/fa';
 import {
   SiNextdotjs,
@@ -22,17 +23,17 @@ import ParticlesBg from './ParticlesBg';
 const projects = [
   {
     id: 1,
-    title: 'Rest Countries',
-    cover: '/rest-countries-cover.png',
-    url: 'https://rest-countries-demo.example.com',
+    title: 'Luxe Donut - Admin Dashboard',
+    cover: '/Cover.jpg', // This will look for /public/rest-countries-cover.png
+    url: 'https://www.behance.net/gallery/227072853/Luxe-Donut-Admin-dashboard',
     description:
-      'A frontend app that fetches and displays country info using REST APIs.',
-    techStack: [FaReact, SiTailwindcss, FaSass],
+      'A UI/UX Design for a Donut Shop Admin Dashboard.',
+    techStack: [FaFigma],
   },
   {
     id: 2,
     title: 'Dashboard UI',
-    cover: '/dashboard-cover.png',
+    cover: '/dashboard-cover.png', // This will look for /public/dashboard-cover.png
     url: 'https://dashboard-ui.example.com',
     description:
       'Admin dashboard template with charts and theme toggling.',
@@ -41,7 +42,7 @@ const projects = [
   {
     id: 3,
     title: 'E-Commerce App',
-    cover: '/ecommerce-cover.png',
+    cover: '/ecommerce-cover.png', // This will look for /public/ecommerce-cover.png
     url: 'https://ecommerce-app.example.com',
     description:
       'Mock e-commerce store with filters and shopping cart.',
@@ -50,7 +51,7 @@ const projects = [
   {
     id: 4,
     title: 'E-Commerce App',
-    cover: '/ecommerce-cover.png',
+    cover: '/ecommerce-cover.png', // This will look for /public/ecommerce-cover.png
     url: 'https://ecommerce-app.example.com',
     description:
       'Mock e-commerce store with filters and shopping cart.',
