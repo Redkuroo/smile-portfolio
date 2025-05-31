@@ -32,12 +32,12 @@ const projects = [
   },
   {
     id: 2,
-    title: 'Dashboard UI',
-    cover: '/dashboard-cover.png', // This will look for /public/dashboard-cover.png
-    url: 'https://dashboard-ui.example.com',
+    title: 'Esports Streaming Site',
+    cover: '/Web-Cover.png', // This will look for /public/dashboard-cover.png
+    url: 'https://www.behance.net/gallery/227155627/Esports-Streaming-Site',
     description:
-      'Admin dashboard template with charts and theme toggling.',
-    techStack: [SiNextdotjs, FaDatabase, FaNodeJs],
+      'A user-friendly and engaging esports streaming website that caters to fans of competitive gaming. The design will focus on delivering a seamless experience for viewers, including discovering live matches, watching streams, interacting with content, and browsing game-related information.',
+    techStack: [FaFigma],
   },
   {
     id: 3,
