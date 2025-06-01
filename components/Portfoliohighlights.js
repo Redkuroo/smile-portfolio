@@ -41,12 +41,12 @@ const projects = [
   },
   {
     id: 3,
-    title: 'E-Commerce App',
-    cover: '/ecommerce-cover.png', // This will look for /public/ecommerce-cover.png
-    url: 'https://ecommerce-app.example.com',
+    title: 'Colina Health Authentication - Flow Design',
+    cover: '/login cover.jpg', // This will look for /public/ecommerce-cover.png
+    url: 'https://www.behance.net/gallery/227205371/Colina-Health-Authentication-Flow-Design',
     description:
-      'Mock e-commerce store with filters and shopping cart.',
-    techStack: [FaReact, SiTailwindcss, SiTypescript],
+      'A UI/UX internship project focused on reimagining the login, sign-up, and forgot password pages. Though not intended for production, this task helped me explore clean layouts, user-friendly forms, and responsive design.',
+    techStack: [FaFigma],
   },
   {
     id: 4,
