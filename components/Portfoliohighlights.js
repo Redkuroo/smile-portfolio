@@ -117,7 +117,8 @@ export default function PortfolioHighlights() {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -50 }}
         transition={{ duration: 0.3 }}
-        className="w-72 max-w-[90vw] bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden group relative"
+        className="w-[90vw] bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden group relative"
+
       >
         <Image
           src={projects[mobileIndex].cover}
