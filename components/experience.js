@@ -17,7 +17,7 @@ export default function ExperienceCard({ title, date, role, duties }) {
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="w-full max-w-sm bg-white dark:bg-zinc-900 rounded-2xl shadow hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-zinc-700 overflow-hidden p-6"
+      className="w-full max-w-xl bg-white dark:bg-zinc-900 rounded-2xl shadow hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-zinc-700 overflow-hidden p-4 sm:p-5"
     >
       <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-3 truncate">{title}</h2>
 

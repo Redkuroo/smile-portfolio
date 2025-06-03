@@ -53,8 +53,7 @@ export default function FloatingEffects() {
       {floatingIcons.map((item, idx) => (
         <motion.div
           key={idx}
-          className={`absolute text-gray-400 z-0 ${item.style}`}
-
+          className={`absolute text-gray-400 z-[-1] ${item.style}`}
           initial={{ y: 0 }}
           animate={{ y: [0, -15, 0] }}
           transition={{ duration: 4 + idx, repeat: Infinity, ease: 'easeInOut' }}

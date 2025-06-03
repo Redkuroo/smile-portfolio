@@ -1,4 +1,4 @@
-  'use client';
+'use client';
   import { useEffect, useMemo, useRef, useState } from 'react';
   import { motion } from 'framer-motion';
   import ParticlesBg from './ParticlesBg';
@@ -88,7 +88,7 @@ const floatingVariants = {
         <ParticlesBg />
 
         {/* Floating Icons */}
-        <div className="fixed inset-0 z-10 overflow-hidden pointer-events-none">
+        <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
           <div className="w-full h-full relative">
             {iconComponents.map(({ Icon }, idx) => (
               <motion.div
@@ -126,19 +126,18 @@ const floatingVariants = {
         </div>
 
         {/* Target Grid with Cards */}
-        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
+        <div className="relative z-20 min-h-screen flex flex-col items-center justify-center p-8">
           <div
             ref={skillsRef}
             className="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-12"
           >
             {iconComponents.map(({ Icon, color, label }, idx) => (
-            <motion.div
-  key={idx}
-  className="w-24 h-28 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center p-3 bg-white shadow-sm"
-  layout
-  transition={{ layout: { duration: 0.8, ease: 'easeInOut' } }}
->
-
+              <motion.div
+                key={idx}
+                className="w-24 h-28 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center p-3 bg-white shadow-sm"
+                layout
+                transition={{ layout: { duration: 0.8, ease: 'easeInOut' } }}
+              >
                 {rearranged && (
                     <>
                   <motion.div
@@ -186,31 +185,55 @@ const floatingVariants = {
           )}
         </div>
 
+        {/* Experience Section */}
+        <div className="hidden sm:block rounded-xl shadow-inner px-2 py-8 sm:px-6 sm:py-12 mb-10 z-30 relative max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center tracking-tight">
+            My Experience
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 justify-items-center">
+            <Experience
+              title="Hububble"
+              date="May, 2021 – Present"
+              role="Junior Front-End Engineer"
+              duties={[
+                'Developed web applications using JavaScript, React, Tailwind, and NextJS.',
+                'Created websites, landing pages, and email templates using HubSpot CMS optimized for various devices.',
+                'Assisted in maintenance and troubleshooting of client websites for performance and satisfaction.',
+              ]}
+            />
+            <Experience
+              title="Upwork"
+              date="October, 2021 – Present"
+              role="Freelance Front-End Engineer"
+              duties={[
+                'Developed and implemented CMS websites using HubSpot.',
+                'Resolved technical issues and improved user experience.',
+                'Achieved top-rated badge for performance and customer satisfaction.',
+              ]}
+            />
+            <Experience
+              title="Upwork"
+              date="October, 2021 – Present"
+              role="Freelance Front-End Engineer"
+              duties={[
+                'Developed and implemented CMS websites using HubSpot.',
+                'Resolved technical issues and improved user experience.',
+                'Achieved top-rated badge for performance and customer satisfaction.',
+              ]}
+            />
+            <Experience
+              title="Upwork"
+              date="October, 2021 – Present"
+              role="Freelance Front-End Engineer"
+              duties={[
+                'Developed and implemented CMS websites using HubSpot.',
+                'Resolved technical issues and improved user experience.',
+                'Achieved top-rated badge for performance and customer satisfaction.',
+              ]}
+            />
+          </div>
+        </div>
 
-         <div className="hidden sm:block rounded-xl shadow-inner px-2 py-4 sm:px-6 mb-6">
-<div className="mt-20 grid gap-8 grid-cols-1 sm:grid-cols-2">
-  <Experience
-    title="Hububble"
-    date="May, 2021 – Present"
-    role="Junior Front-End Engineer"
-    duties={[
-      'Developed web applications using JavaScript, React, Tailwind, and NextJS.',
-      'Created websites, landing pages, and email templates using HubSpot CMS optimized for various devices.',
-      "Assisted in maintenance and troubleshooting of client websites for performance and satisfaction.",
-    ]}
-  />
-  <Experience
-    title="Upwork"
-    date="October, 2021 – Present"
-    role="Freelance Front-End Engineer"
-    duties={[
-      'Developed and implemented CMS websites using HubSpot.',
-      'Resolved technical issues and improved user experience.',
-      'Achieved top-rated badge for performance and customer satisfaction.',
-    ]}
-  />
-</div>
-</div>
       </>
     );
   }

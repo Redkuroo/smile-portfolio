@@ -102,7 +102,8 @@ export default function PortfolioHighlights() {
     </h2>
 
     {/* Mobile: Arrow navigation, show one project */}
-    <div className="sm:hidden flex items-center justify-center gap-2 mb-6">
+  <div className="sm:hidden flex items-center justify-center gap-2 mb-4 px-2">
+
       <button
         onClick={() => setMobileIndex(i => Math.max(i - 1, 0))}
         disabled={!showLeft}
@@ -117,7 +118,7 @@ export default function PortfolioHighlights() {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -50 }}
         transition={{ duration: 0.3 }}
-        className="w-[90vw] bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden group relative"
+        className="w-full max-w-sm mx-auto bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden group relative"
 
       >
         <Image

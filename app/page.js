@@ -24,9 +24,7 @@ export default function Home() {
               <PortfolioHighlights />
             </section>
 
-            <section id="about" className="w-full p-6 mt-8">
-              <About />
-            </section>
+
           </div>
         </main>
       </div>
