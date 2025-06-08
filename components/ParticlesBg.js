@@ -55,11 +55,11 @@ export default function ParticlesBackground() {
             enable: true,
             speed: 0.5,
             direction: 'none',
-            outModes: 'bounce',
+            outModes: 'destroy',
             straight: false,
           },
           number: {
-            value: 60,
+            value: 50,
             density: {
               enable: true,
               area: 900,
