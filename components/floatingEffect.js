@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import ParticlesBg from './ParticlesBg';
 import {
   SiVuedotjs,
@@ -113,14 +113,40 @@ export default function FloatingEffects() {
   // Sort from oldest to newest
   const sortedExperiences = experienceData.sort((a, b) => a.year - b.year);
 
-  // Scroll-based vertical timeline animation
+  // Scroll-based vertical timeline animation - ENHANCED
   const experienceRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: experienceRef,
-    offset: ['start end', 'end start'],
+    offset: ['start 0.8', 'end 0.2'], // Better offset points
   });
-  const animatedHeight = useTransform(scrollYProgress, [0, 1], ['0%', '150%']);
-
+  
+  // Add smooth spring animation for better performance
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+  
+  const animatedHeight = useTransform(smoothProgress, [0, 1], ['0%', '120%']); // Adjusted height range
+  
+  // Additional timeline animations
+  const timelineOpacity = useTransform(smoothProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0.8]);
+  const timelineScale = useTransform(smoothProgress, [0, 0.5, 1], [0.95, 1, 1.02]);
+  
+  // Individual experience item animations - FIXED FOR EQUAL OPACITY
+  const getExperienceAnimation = (index) => {
+    const totalItems = sortedExperiences.length;
+    // Give each item equal spacing across the scroll range
+    const itemProgress = index / Math.max(totalItems, 1);
+    const triggerStart = itemProgress * 0.5; // Start earlier
+    const triggerEnd = triggerStart + 0.3; // Ensure full opacity is reached
+    
+    return {
+      opacity: useTransform(smoothProgress, [triggerStart, triggerEnd, 1], [0, 1, 1]), // Stay at full opacity
+      y: useTransform(smoothProgress, [triggerStart, triggerEnd], [50, 0]),
+      scale: useTransform(smoothProgress, [triggerStart, triggerEnd], [0.95, 1])
+    };
+  };
 
   return (
     <>
@@ -220,7 +246,7 @@ export default function FloatingEffects() {
         )}
       </div>
 
-      {/* Experience Timeline Section */}
+      {/* Experience Timeline Section - ENHANCED */}
       <div
         ref={experienceRef}
         className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
@@ -229,23 +255,34 @@ export default function FloatingEffects() {
           My Experience
         </h2>
 
-        {/* Vertical timeline line (scroll animated) */}
+        {/* Vertical timeline line (scroll animated) - ENHANCED */}
         <motion.div
-          className="absolute left-6 top-0 w-1 bg-gradient-to-b from-red-600 via-red-500 to-red-800 rounded-full"
-          style={{ height: animatedHeight }}
+          className="absolute left-6 top-0 w-1 bg-gradient-to-b from-red-600 via-red-500 to-red-800 rounded-full origin-top"
+          style={{ 
+            height: animatedHeight,
+            opacity: timelineOpacity,
+            scaleY: timelineScale
+          }}
         />
 
         <div className="relative flex flex-col gap-12 ml-10">
-          {sortedExperiences.map((exp, index) => (
-            <Experience
-              key={index}
-              title={exp.title}
-              date={exp.date}
-              role={exp.role}
-              duties={exp.duties}
-              year={exp.year}
-            />
-          ))}
+          {sortedExperiences.map((exp, index) => {
+            const experienceAnimation = getExperienceAnimation(index);
+            return (
+              <motion.div
+                key={`${exp.title}-${index}`}
+                style={experienceAnimation}
+              >
+                <Experience
+                  title={exp.title}
+                  date={exp.date}
+                  role={exp.role}
+                  duties={exp.duties}
+                  year={exp.year}
+                />
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </>
