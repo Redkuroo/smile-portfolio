@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import ParticlesBg from './ParticlesBg';
 import {
   SiVuedotjs,
@@ -47,6 +47,7 @@ export default function FloatingEffects() {
   const [iconPositions, setIconPositions] = useState([]);
   const skillsRef = useRef(null);
 
+  // Setup icon positions randomly on mount
   useEffect(() => {
     setIconPositions(
       iconComponents.map(() => ({
@@ -56,11 +57,10 @@ export default function FloatingEffects() {
     );
   }, [iconComponents]);
 
+  // Observe when to rearrange icons
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setRearranged(entry.isIntersecting);
-      },
+      ([entry]) => setRearranged(entry.isIntersecting),
       { threshold: 1 }
     );
 
@@ -75,45 +75,51 @@ export default function FloatingEffects() {
     'bg-white rounded-full w-12 h-12 p-2 shadow-md flex items-center justify-center transition duration-300';
 
   // Experience data
- // Add this inside your FloatingEffects component file
+  const experienceData = [
+    {
+      title: 'Hububble',
+      date: 'May, 2021 – Present',
+      role: 'Junior Front-End Engineer',
+      duties: [
+        'Developed web applications using JavaScript, React, Tailwind, and NextJS.',
+        'Created websites, landing pages, and email templates using HubSpot CMS.',
+        'Assisted in maintenance and troubleshooting of client websites.',
+      ],
+      year: 2021,
+    },
+    {
+      title: 'Upwork',
+      date: 'October, 2021 – Present',
+      role: 'Freelance Front-End Engineer',
+      duties: [
+        'Developed and implemented CMS websites using HubSpot.',
+        'Resolved technical issues and improved user experience.',
+        'Achieved top-rated badge for performance and customer satisfaction.',
+      ],
+      year: 2021,
+    },
+    {
+      title: 'Another Client',
+      date: 'January, 2022 – Present',
+      role: 'Frontend Consultant',
+      duties: [
+        'Collaborated with teams to deliver performant web interfaces.',
+        'Introduced design systems to improve scalability.',
+      ],
+      year: 2022,
+    },
+  ];
 
-const experienceData = [
-  {
-    title: 'Hububble',
-    date: 'May, 2021 – Present',
-    role: 'Junior Front-End Engineer',
-    duties: [
-      'Developed web applications using JavaScript, React, Tailwind, and NextJS.',
-      'Created websites, landing pages, and email templates using HubSpot CMS.',
-      'Assisted in maintenance and troubleshooting of client websites.',
-    ],
-    year: 2021,
-  },
-  {
-    title: 'Upwork',
-    date: 'October, 2021 – Present',
-    role: 'Freelance Front-End Engineer',
-    duties: [
-      'Developed and implemented CMS websites using HubSpot.',
-      'Resolved technical issues and improved user experience.',
-      'Achieved top-rated badge for performance and customer satisfaction.',
-    ],
-    year: 2021,
-  },
-  {
-    title: 'Another Client',
-    date: 'January, 2022 – Present',
-    role: 'Frontend Consultant',
-    duties: [
-      'Collaborated with teams to deliver performant web interfaces.',
-      'Introduced design systems to improve scalability.',
-    ],
-    year: 2022,
-  },
-];
+  // Sort from oldest to newest
+  const sortedExperiences = experienceData.sort((a, b) => a.year - b.year);
 
-// Sort experiences from oldest to newest
-const sortedExperiences = experienceData.sort((a, b) => a.year - b.year);
+  // Scroll-based vertical timeline animation
+  const experienceRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: experienceRef,
+    offset: ['start end', 'end start'],
+  });
+  const animatedHeight = useTransform(scrollYProgress, [0, 1], ['0%', '150%']);
 
 
   return (
@@ -214,35 +220,34 @@ const sortedExperiences = experienceData.sort((a, b) => a.year - b.year);
         )}
       </div>
 
-    
       {/* Experience Timeline Section */}
-<div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-10">
-    My Experience
-  </h2>
+      <div
+        ref={experienceRef}
+        className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      >
+        <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-10">
+          My Experience
+        </h2>
 
-  {/* Vertical timeline line */}
-  <motion.div
-    className="absolute left-6 top-0 w-1 h-full bg-gradient-to-b from-yellow-300 via-pink-400 to-indigo-500 rounded-full"
-    initial={{ height: 0 }}
-    whileInView={{ height: '100%' }}
-    transition={{ duration: 2, ease: 'easeOut' }}
-  />
+        {/* Vertical timeline line (scroll animated) */}
+        <motion.div
+          className="absolute left-6 top-0 w-1 bg-gradient-to-b from-red-600 via-red-500 to-red-800 rounded-full"
+          style={{ height: animatedHeight }}
+        />
 
-  <div className="relative flex flex-col gap-12 ml-10">
-    {sortedExperiences.map((exp, index) => (
-      <Experience
-        key={index}
-        title={exp.title}
-        date={exp.date}
-        role={exp.role}
-        duties={exp.duties}
-        year={exp.year}
-      />
-    ))}
-  </div>
-</div>
-
+        <div className="relative flex flex-col gap-12 ml-10">
+          {sortedExperiences.map((exp, index) => (
+            <Experience
+              key={index}
+              title={exp.title}
+              date={exp.date}
+              role={exp.role}
+              duties={exp.duties}
+              year={exp.year}
+            />
+          ))}
+        </div>
+      </div>
     </>
   );
 }

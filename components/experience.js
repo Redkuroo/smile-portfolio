@@ -14,7 +14,7 @@ export default function ExperienceCard({ title, date, role, duties, year }) {
     <div className="relative pl-16">
       {/* Year Badge */}
       <div className="absolute left-0 top-3 w-12 text-center">
-        <div className="bg-gradient-to-r from-yellow-400 to-pink-500 text-white text-sm font-bold rounded-full px-2 py-1 shadow-md">
+        <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-800 text-white text-sm font-bold rounded-full px-2 py-1 shadow-md">
           {year}
         </div>
       </div>
