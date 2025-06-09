@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaInfoCircle,
@@ -20,6 +20,7 @@ import {
 import Image from 'next/image';
 import ParticlesBg from './ParticlesBg';
 
+// Add a `category` field to each project
 const projects = [
   {
     id: 1,
@@ -28,6 +29,7 @@ const projects = [
     url: 'https://www.behance.net/gallery/227072853/Luxe-Donut-Admin-dashboard',
     description: 'A UI/UX Design for a Donut Shop Admin Dashboard.',
     techStack: [FaFigma],
+    category: 'Design',
   },
   {
     id: 2,
@@ -36,6 +38,7 @@ const projects = [
     url: 'https://www.behance.net/gallery/227155627/Esports-Streaming-Site',
     description: 'A user-friendly and engaging esports streaming website for competitive gaming fans.',
     techStack: [FaFigma],
+    category: 'Design',
   },
   {
     id: 3,
@@ -44,6 +47,7 @@ const projects = [
     url: 'https://www.behance.net/gallery/227205371/Colina-Health-Authentication-Flow-Design',
     description: 'Reimagined login, signup, and forgot-password pages during a UI/UX internship.',
     techStack: [FaFigma],
+    category: 'Design',
   },
   {
     id: 4,
@@ -52,8 +56,10 @@ const projects = [
     url: 'https://ecommerce-app.example.com',
     description: 'Mock e-commerce store with filters and shopping cart.',
     techStack: [FaReact, SiTailwindcss, SiTypescript],
+    category: 'Frontend',
   },
 ];
+
 
 const BurstLetter = ({ char, index }) => {
   const [isBursting, setIsBursting] = useState(false);
@@ -80,30 +86,43 @@ const BurstText = ({ text }) => (
   </span>
 );
 
-export default function PortfolioHighlights() {
+export default function PortfolioHighlights({ filter = 'All' }) {
   const [activeProject, setActiveProject] = useState(null);
   const [mobileIndex, setMobileIndex] = useState(0);
 
+  const filteredProjects = useMemo(() => {
+    if (filter === 'All') return projects;
+    return projects.filter((project) => project.category === filter);
+  }, [filter]);
+
   const showLeft = mobileIndex > 0;
-  const showRight = mobileIndex < projects.length - 1;
+  const showRight = mobileIndex < filteredProjects.length - 1;
 
   const handleSwipe = (event, info) => {
     const offset = info.offset.x;
     const velocity = info.velocity.x;
 
     if (offset < -100 || velocity < -500) {
-      if (mobileIndex < projects.length - 1) setMobileIndex((i) => i + 1);
+      if (mobileIndex < filteredProjects.length - 1) setMobileIndex((i) => i + 1);
     } else if (offset > 100 || velocity > 500) {
       if (mobileIndex > 0) setMobileIndex((i) => i - 1);
     }
   };
+
+  if (filteredProjects.length === 0) {
+    return (
+      <section className="py-6 text-center text-gray-500">
+        <p>No projects available in this category.</p>
+      </section>
+    );
+  }
 
   return (
     <section className="relative py-6 sm:py-8 text-black overflow-hidden min-h-[60vh]">
       <ParticlesBg />
       <div className="relative z-10 container mx-auto px-2 sm:px-4 max-w-6xl">
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center tracking-tight">
-          <BurstText text="Portfolio Highlights" />
+          <BurstText text={`${filter} Projects`} />
         </h2>
 
         {/* Mobile */}
@@ -211,7 +230,7 @@ export default function PortfolioHighlights() {
         <div className="hidden sm:block rounded-xl shadow-inner px-2 py-4 sm:px-6 mb-6">
           <div className="overflow-x-auto scrollbar-custom pb-4">
             <div className="flex gap-4 sm:gap-6 min-w-full w-max">
-              {projects.map((project, index) => (
+              {filteredProjects.map((project, index) => (
                 <motion.div
                   key={project.id}
                   initial={{ opacity: 0, y: 30 }}

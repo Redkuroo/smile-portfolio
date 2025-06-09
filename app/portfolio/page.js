@@ -1,11 +1,15 @@
 'use client';
+import { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import ParticlesBg from '../../components/ParticlesBg';
 import FloatingEffects from '../../components/floatingEffect';
 import SocialSidebar from '../../components/SocialSideBar';
-import About from '../../components/about';
+import PortfolioHighlights from '../../components/Portfoliohighlights';
 
-export default function AboutPage() {
+export default function PortfolioPage() {
+  const [filter, setFilter] = useState('All');
+  const tabs = ['All', 'Frontend', 'Design'];
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       <Navbar />
@@ -16,12 +20,25 @@ export default function AboutPage() {
         </div>
 
         <main className="flex-1 p-4 lg:pl-32 overflow-y-auto">
-            <section className="w-full p-6">
-           <p>dadas</p>
- 
+          <section className="w-full max-w-6xl mx-auto p-6">
+            <div className="flex justify-center gap-4 mb-8">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setFilter(tab)}
+                  className={`px-4 py-2 rounded-full font-medium transition shadow ${
+                    filter === tab
+                      ? 'bg-red-500 text-white scale-105'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            <PortfolioHighlights filter={filter} />
           </section>
-          
-        
         </main>
       </div>
 
