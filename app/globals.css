@@ -88,3 +88,11 @@ body {
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
   background: #666;
 }
+
+.masonry-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+

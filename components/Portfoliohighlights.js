@@ -122,7 +122,7 @@ export default function PortfolioHighlights({ filter = 'All' }) {
       <ParticlesBg />
       <div className="relative z-10 container mx-auto px-2 sm:px-4 max-w-6xl">
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center tracking-tight">
-          <BurstText text={`${filter} Projects`} />
+          <BurstText text={filter === 'All' ? 'Portfolio Highlights' : `${filter} Projects`} />
         </h2>
 
         {/* Mobile */}
