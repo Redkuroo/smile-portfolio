@@ -3,27 +3,32 @@ import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section className="py-16 text-gray-800 z-20 relative">
-      <div className="container mx-auto px-4 max-w-5xl">
+    <section className="py-16 text-gray-800 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         <motion.h2
-          className="text-3xl sm:text-4xl font-bold mb-6 text-center"
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 text-center tracking-tight"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true }}
         >
           About Me
         </motion.h2>
 
-        <motion.p
-          className="text-lg leading-relaxed text-center text-gray-600 max-w-3xl mx-auto z-0"
+        <motion.div
+          className="max-w-3xl mx-auto space-y-6 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
           viewport={{ once: true }}
         >
-          Hello! I'm a passionate front-end developer who loves crafting clean, responsive, and interactive web experiences. Whether it's building dynamic UIs with React or styling with Tailwind CSS, I enjoy solving design and technical challenges. I'm always learning and exploring new technologies to grow as a developer.
-        </motion.p>
+          <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+            Hello! I’m a front-end developer and UI/UX designer based in Davao City, Philippines. I specialize in creating clean, responsive, and engaging user interfaces using tools like React and Tailwind CSS. I’m passionate about crafting designs that are not only visually appealing but also intuitive and user-friendly.
+          </p>
+          <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+            Beyond coding, I’m a proud Portland Trail Blazers fan and a Mobile Legends gamer, thriving on both competition and creativity. I’m always learning, growing, and pushing boundaries—whether through design, development, or a clutch comeback in ranked matches.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
