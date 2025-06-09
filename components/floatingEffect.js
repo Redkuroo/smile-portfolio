@@ -9,6 +9,7 @@ import {
   SiReact,
   SiNextdotjs,
   SiFigma,
+  SiTailwindcss,
 } from 'react-icons/si';
 import Experience from './experience';
 
@@ -33,7 +34,7 @@ const floatingVariants = {
 export default function FloatingEffects() {
   const iconComponents = useMemo(
     () => [
-      { Icon: SiVuedotjs, color: '#41b883', label: 'Vue.js' },
+      { Icon: SiTailwindcss, color: '#41b883', label: 'Tailwindcss' },
       { Icon: SiTypescript, color: '#3178c6', label: 'TypeScript' },
       { Icon: SiJavascript, color: '#f7df1e', label: 'JavaScript' },
       { Icon: SiReact, color: '#61dafb', label: 'React' },
@@ -77,34 +78,35 @@ export default function FloatingEffects() {
   // Experience data
   const experienceData = [
     {
-      title: 'Hububble',
-      date: 'May, 2021 – Present',
-      role: 'Junior Front-End Engineer',
+      title: 'Focusinc Group Corp.',
+      date: 'December 2020 - May 2021',
+      role: 'Network Administrator Intern',
       duties: [
-        'Developed web applications using JavaScript, React, Tailwind, and NextJS.',
-        'Created websites, landing pages, and email templates using HubSpot CMS.',
-        'Assisted in maintenance and troubleshooting of client websites.',
+        'Assist in the maintenance and configuration of network systems including routers, switches, and other networking hardware.',
+        'Monitor network performance and troubleshoot connectivity issues.',
       ],
       year: 2021,
     },
     {
-      title: 'Upwork',
-      date: 'October, 2021 – Present',
-      role: 'Freelance Front-End Engineer',
+      title: 'Holy Cross of Davao College',
+      date: 'July 2022 - June 2025',
+      role: 'IT Support',
       duties: [
-        'Developed and implemented CMS websites using HubSpot.',
-        'Resolved technical issues and improved user experience.',
-        'Achieved top-rated badge for performance and customer satisfaction.',
+        'Maintain and monitor IT lab systems by performing regular updates and addressing technical issues promptly.',
+        'Provide technical support and troubleshooting assistance to students and faculty.',
+        'Assist in the setup and configuration of hardware, software, and network systems.',
       ],
       year: 2021,
     },
     {
-      title: 'Another Client',
-      date: 'January, 2022 – Present',
-      role: 'Frontend Consultant',
+      title: 'Jairosoft',
+      date: 'February 2025 – June 2025',
+      role: 'UI/UX Designer Intern',
       duties: [
-        'Collaborated with teams to deliver performant web interfaces.',
-        'Introduced design systems to improve scalability.',
+        'Designed responsive user interfaces for web and mobile platforms, improving user engagement by 30%',
+        'Created wireframes, prototypes, and high-fidelity mockups using Figma',
+        'Developed and maintained a design system to ensure brand consistency across all digital touchpoints',
+        'Collaborated with developers and product managers to implement designs aligned with project goals and timelines',
       ],
       year: 2022,
     },

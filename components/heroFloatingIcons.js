@@ -9,6 +9,7 @@ import {
   SiReact,
   SiNextdotjs,
   SiFigma,
+  SiTailwindcss
 } from 'react-icons/si';
 
 const shuffleArray = (array) => {
@@ -21,7 +22,7 @@ const shuffleArray = (array) => {
 };
 
 export default function FloatingEffects() {
-  const iconComponents = [SiVuedotjs, SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiFigma];
+  const iconComponents = [SiTailwindcss, SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiFigma];
   const icons = useMemo(() => iconComponents.map((Icon, index) => <Icon key={index} size={28} />), []);
 
   const positions = useMemo(() => [
