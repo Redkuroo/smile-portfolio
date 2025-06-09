@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import SocialSidebar from '../components/SocialSideBar';
 import PortfolioHighlights from '../components/Portfoliohighlights';
-import About from '../components/about';
+
 
 export default function Home() {
   return (

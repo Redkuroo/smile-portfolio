@@ -38,7 +38,7 @@ export default function Navbar() {
             {[
   { text: "Profile", href: "/#profile" },
   { text: "About", href: "/about" }, // This is a separate page now
-  { text: "Portfolio", href: "/#portfolio" },
+  { text: "Portfolio", href: "/portfolio" },
   { text: "Contact", href: "/#contact" },
 ].map(({ text, href }) => (
   <NavLink key={text} href={href} text={text} current={pathname === href || pathname === `/${text.toLowerCase()}`} />
