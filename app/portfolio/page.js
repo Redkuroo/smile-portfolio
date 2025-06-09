@@ -6,15 +6,8 @@ import ParticlesBg from '../../components/ParticlesBg';
 import SocialSidebar from '../../components/SocialSideBar';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import {
-  FaFigma,
-  FaReact,
-  FaInfoCircle
-} from 'react-icons/fa';
-import {
-  SiTailwindcss,
-  SiTypescript,
-} from 'react-icons/si';
+import { FaFigma, FaReact, FaInfoCircle } from 'react-icons/fa';
+import { SiTailwindcss, SiTypescript } from 'react-icons/si';
 
 const projects = [
   {
@@ -74,7 +67,7 @@ export default function PortfolioPage() {
           <SocialSidebar />
         </aside>
 
-        <main className="flex-1 p-4 lg:pl-32 w-full">
+        <main className="flex-1 w-full pt-24 px-4 lg:pl-32">
           <section className="max-w-6xl mx-auto p-6">
             <div className="flex justify-center gap-4 mb-8">
               {tabs.map((tab) => (
@@ -117,9 +110,7 @@ export default function PortfolioPage() {
                         </h3>
                         <button
                           onClick={() =>
-                            setActiveProject(
-                              activeProject === project.id ? null : project.id
-                            )
+                            setActiveProject(activeProject === project.id ? null : project.id)
                           }
                           className="ml-2 bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition cursor-pointer"
                           aria-label="More info"
@@ -129,45 +120,48 @@ export default function PortfolioPage() {
                       </div>
                     </div>
 
-                    {activeProject === project.id && (
-                      <motion.div
-                        initial={{ y: '100%' }}
-                        animate={{ y: 0 }}
-                        exit={{ y: '100%' }}
-                        transition={{ duration: 0.4 }}
-                        className="absolute inset-0 bg-white/95 backdrop-blur-md border border-gray-300 rounded-2xl z-30 flex flex-col p-4 text-sm shadow-lg"
-                      >
-                        <button
-                          onClick={() => setActiveProject(null)}
-                          className="absolute top-2.5 right-2.5 p-1.5 rounded-full cursor-pointer hover:scale-110 transition"
-                          aria-label="Close project details"
+                    <AnimatePresence>
+                      {activeProject === project.id && (
+                        <motion.div
+                          key="details"
+                          initial={{ y: '100%' }}
+                          animate={{ y: 0 }}
+                          exit={{ y: '100%' }}
+                          transition={{ duration: 0.4 }}
+                          className="absolute inset-0 bg-white/95 backdrop-blur-md border border-gray-300 rounded-2xl z-30 flex flex-col p-4 text-sm shadow-lg"
                         >
-                          ✕
-                        </button>
-                        <div className="overflow-y-auto mt-10 space-y-4 max-h-[80%] pr-2">
-                          <div>
-                            <h4 className="text-base font-semibold mb-1">Description</h4>
-                            <p className="text-gray-600 leading-relaxed">{project.description}</p>
-                          </div>
-                          <div>
-                            <h4 className="text-base font-semibold mb-1">Tech Stack</h4>
-                            <div className="flex gap-4 text-2xl text-gray-700">
-                              {project.techStack.map((Icon, idx) => (
-                                <Icon key={idx} className="hover:text-red-500 transition" />
-                              ))}
-                            </div>
-                          </div>
-                          <a
-                            href={project.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition text-white font-semibold text-center shadow"
+                          <button
+                            onClick={() => setActiveProject(null)}
+                            className="absolute top-2.5 right-2.5 p-1.5 rounded-full cursor-pointer hover:scale-110 transition"
+                            aria-label="Close project details"
                           >
-                            View Project
-                          </a>
-                        </div>
-                      </motion.div>
-                    )}
+                            ✕
+                          </button>
+                          <div className="overflow-y-auto mt-10 space-y-4 max-h-[80%] pr-2">
+                            <div>
+                              <h4 className="text-base font-semibold mb-1">Description</h4>
+                              <p className="text-gray-600 leading-relaxed">{project.description}</p>
+                            </div>
+                            <div>
+                              <h4 className="text-base font-semibold mb-1">Tech Stack</h4>
+                              <div className="flex gap-4 text-2xl text-gray-700">
+                                {project.techStack.map((Icon, idx) => (
+                                  <Icon key={idx} className="hover:text-red-500 transition" />
+                                ))}
+                              </div>
+                            </div>
+                            <a
+                              href={project.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition text-white font-semibold text-center shadow"
+                            >
+                              View Project
+                            </a>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
                 ))}
               </AnimatePresence>
