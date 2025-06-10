@@ -15,6 +15,7 @@ export default function Navbar() {
     { label: 'Home', href: '/', icon: <FaHome size={22} /> },
     { label: 'About', href: '/about', icon: <FaUser size={22} /> },
     { label: 'Projects', href: '/portfolio', icon: <FaFolderOpen size={22} /> },
+    { label: 'Certificates', href: '/certificates', icon: <FaFolderOpen size={22} /> },
     { label: 'Contact', href: '/contact', icon: <FaEnvelope size={22} /> },
   ];
 

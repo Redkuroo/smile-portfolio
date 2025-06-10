@@ -1,9 +1,9 @@
 'use client';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { FaCertificate } from 'react-icons/fa';
-import { BurstText } from './Portfoliohighlights';
-import ParticlesBg from './ParticlesBg';
+import React, { useState } from 'react';
+import Navbar from '../../components/Navbar';
+import ParticlesBg from '../../components/ParticlesBg';
+import SocialSidebar from '../../components/SocialSideBar';
+import { BurstText } from '../../components/Portfoliohighlights';
 
 const certificates = [
   {
@@ -128,7 +128,15 @@ const certificates = [
   }
 ];
 
-export default function About() {
+const categories = [
+  { id: 'all', label: 'All Certificates' },
+  { id: 'competition', label: 'Competitions' },
+  { id: 'programming', label: 'Programming Related Workshops' },
+  { id: 'gathering', label: 'IT Related Gatherings' },
+  { id: 'uiux', label: 'UI/UX' }
+];
+
+export default function CertificatesPage() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const sortedCertificates = [...certificates].sort((a, b) => b.date - a.date);
@@ -137,48 +145,70 @@ export default function About() {
     ? sortedCertificates 
     : sortedCertificates.filter(cert => cert.category === selectedCategory);
 
-  const categories = [
-    { id: 'all', label: 'All Certificates' },
-    { id: 'competition', label: 'Competitions' },
-    { id: 'programming', label: 'Programming Related Workshops' },
-    { id: 'gathering', label: 'IT Related Gatherings' },
-    { id: 'uiux', label: 'UI/UX' }
-  ];
-
   return (
-    <section className="py-16 text-gray-800 dark:text-white relative">
-      <div className="absolute inset-0 z-0">
-        <ParticlesBg />
-      </div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10">
-        <motion.h2
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 text-center tracking-tight text-black dark:text-white"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          viewport={{ once: true }}
-        >
-          <BurstText text="About Me" />
-        </motion.h2>
+    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-zinc-900 text-gray-800 dark:text-white">
+      <header className="sticky top-0 z-50 bg-gray-100 dark:bg-zinc-900">
+        <Navbar />
+      </header>
+      <div className="flex flex-1 flex-col lg:flex-row">
+        <aside className="hidden lg:block lg:fixed lg:top-20 lg:left-4 lg:w-16 z-50">
+          <SocialSidebar />
+        </aside>
+        <main className="flex-1 relative p-4 lg:pl-32 overflow-y-auto">
+          <ParticlesBg />
+          <section className="w-full max-w-5xl mx-auto p-6 relative z-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+              <BurstText text="Certificates" />
+            </h2>
+            
+            {/* Category Filter */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px-4 py-2 rounded-full font-medium transition-shadow duration-300 cursor-pointer ${
+                    selectedCategory === category.id
+                      ? 'bg-red-500 text-white shadow-md scale-105'
+                      : 'bg-gray-200 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-zinc-700'
+                  }`}
+                  aria-pressed={selectedCategory === category.id}
+                >
+                  {category.label}
+                </button>
+              ))}
+            </div>
 
-        <motion.div
-          className="max-w-3xl mx-auto space-y-6 text-center bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl shadow p-8 mb-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          viewport={{ once: true }}
-        >
-          <p className="text-base sm:text-lg leading-relaxed text-gray-800 dark:text-white">
-            Hello! I'm a front-end developer and UI/UX designer based in Davao City, Philippines. I specialize in creating clean, responsive, and engaging user interfaces using tools like React and Tailwind CSS. I'm passionate about crafting designs that are not only visually appealing but also intuitive and user-friendly.
-          </p>
-          <p className="text-base sm:text-lg leading-relaxed text-gray-800 dark:text-white">
-            Beyond coding, I'm a proud Portland Trail Blazers fan and a Mobile Legends gamer, thriving on both competition and creativity. I'm always learning, growing, and pushing boundaries—whether through design, development, or a clutch comeback in ranked matches.
-          </p>
-        </motion.div>
-
-        {/* Certificates Section */}
-        {/* Removed old certificates section code */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {filteredCertificates.map((cert, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white dark:bg-zinc-800 rounded-xl shadow-md border border-zinc-200 dark:border-zinc-700 p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-xl transition-all duration-200"
+                  onClick={() => setSelectedImage(cert.image)}
+                >
+                  <img src={cert.image} alt={cert.title} className="w-40 h-40 object-cover rounded-lg mb-3 border-2 border-red-200 dark:border-red-400 shadow" />
+                  <div className="font-semibold text-lg text-center mb-1">{cert.title}</div>
+                  <div className="text-sm text-zinc-500 dark:text-zinc-300 text-center mb-1">{cert.issuer}</div>
+                  <div className="text-xs text-zinc-400 dark:text-zinc-400">{cert.date}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </main>
       </div>
-    </section>
+      {/* Full-screen image view */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center cursor-pointer"
+          onClick={() => setSelectedImage(null)}
+        >
+          <img 
+            src={selectedImage} 
+            alt="Certificate" 
+            className="max-w-[90%] max-h-[90vh] object-contain"
+          />
+        </div>
+      )}
+    </div>
   );
-}
+} 
