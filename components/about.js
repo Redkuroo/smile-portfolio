@@ -146,12 +146,16 @@ export default function About() {
   ];
 
   return (
-    <section className="py-8 sm:py-12 md:py-16 text-gray-800 dark:text-white relative">
-      <div className="absolute inset-0 z-0">
+    <section 
+      className="py-8 sm:py-12 md:py-16 text-gray-800 dark:text-white relative"
+      aria-labelledby="about-heading"
+    >
+      <div className="absolute inset-0 z-0" aria-hidden="true">
         <ParticlesBg />
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10">
         <motion.h2
+          id="about-heading"
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 text-center tracking-tight text-black dark:text-white"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -167,18 +171,121 @@ export default function About() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
           viewport={{ once: true }}
+          role="region"
+          aria-label="About me description"
         >
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-800 dark:text-white">
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-900 dark:text-white">
             Hello! I'm a front-end developer and UI/UX designer based in Davao City, Philippines. I specialize in creating clean, responsive, and engaging user interfaces using tools like React and Tailwind CSS. I'm passionate about crafting designs that are not only visually appealing but also intuitive and user-friendly.
           </p>
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-800 dark:text-white">
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-900 dark:text-white">
             Beyond coding, I'm a proud Portland Trail Blazers fan and a Mobile Legends gamer, thriving on both competition and creativity. I'm always learning, growing, and pushing boundaries—whether through design, development, or a clutch comeback in ranked matches.
           </p>
         </motion.div>
 
         {/* Certificates Section */}
-        {/* Removed old certificates section code */}
+        <div 
+          className="mt-12 sm:mt-16"
+          role="region"
+          aria-labelledby="certificates-heading"
+        >
+          <h3 
+            id="certificates-heading"
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-6 sm:mb-8 text-gray-900 dark:text-white"
+          >
+            <span className="flex items-center justify-center gap-2">
+              <FaCertificate className="text-red-600 dark:text-red-400" aria-hidden="true" />
+              Certificates & Achievements
+            </span>
+          </h3>
+
+          {/* Category Filter */}
+          <div 
+            className="sticky top-0 z-20 flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 bg-gray-100 dark:bg-zinc-900 py-2 px-2"
+            role="tablist"
+            aria-label="Certificate categories"
+          >
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                role="tab"
+                aria-selected={selectedCategory === category.id}
+                aria-controls={`certificates-${category.id}`}
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base rounded-full font-medium transition-shadow duration-300 cursor-pointer ${
+                  selectedCategory === category.id
+                    ? 'bg-red-700 dark:bg-red-600 text-white shadow-md scale-105'
+                    : 'bg-gray-200 dark:bg-zinc-800 text-gray-900 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-zinc-700'
+                } focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900`}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Certificates Grid */}
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+            role="tabpanel"
+            id={`certificates-${selectedCategory}`}
+            aria-labelledby={`tab-${selectedCategory}`}
+          >
+            {filteredCertificates.map((cert, idx) => (
+              <div
+                key={idx}
+                className="bg-white dark:bg-zinc-800 rounded-lg sm:rounded-xl shadow-md border border-zinc-200 dark:border-zinc-700 p-3 sm:p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-xl transition-all duration-200 focus-within:ring-2 focus-within:ring-red-500 focus-within:ring-offset-2 dark:focus-within:ring-offset-zinc-900"
+                onClick={() => setSelectedImage(cert.image)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedImage(cert.image);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${cert.title} certificate`}
+              >
+                <img 
+                  src={cert.image} 
+                  alt={`Certificate for ${cert.title} issued by ${cert.issuer} in ${cert.date}`}
+                  className="w-32 h-32 sm:w-40 sm:h-40 object-cover rounded-lg mb-2 sm:mb-3 border-2 border-red-200 dark:border-red-400 shadow" 
+                />
+                <div className="font-semibold text-sm sm:text-base text-center mb-1 line-clamp-2 text-gray-900 dark:text-white">{cert.title}</div>
+                <div className="text-xs sm:text-sm text-gray-700 dark:text-gray-200 text-center mb-1 line-clamp-1">{cert.issuer}</div>
+                <div className="text-xs text-gray-600 dark:text-gray-300">{cert.date}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+      {/* Full-screen image view */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center cursor-pointer p-4"
+          onClick={() => setSelectedImage(null)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setSelectedImage(null);
+            }
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Certificate full view"
+        >
+          <button
+            className="absolute top-4 right-4 text-white hover:text-red-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900 rounded-full p-2"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Close certificate view"
+          >
+            ×
+          </button>
+          <img 
+            src={selectedImage} 
+            alt="Certificate full view"
+            className="max-w-[95%] max-h-[90vh] object-contain rounded-lg"
+          />
+        </div>
+      )}
     </section>
   );
 }
