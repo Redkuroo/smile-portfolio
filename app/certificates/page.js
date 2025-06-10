@@ -162,7 +162,7 @@ export default function CertificatesPage() {
             </h2>
             
             {/* Category Filter */}
-            <div className="sticky top-0 z-20 flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 bg-gray-100 dark:bg-zinc-900 py-2 px-2" role="tablist">
+            <div className="sticky top-0 z-20 flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 py-2 px-2" role="tablist">
               {categories.map((category) => (
                 <button
                   key={category.id}
