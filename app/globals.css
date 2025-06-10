@@ -17,6 +17,7 @@ html.dark {
 
 body {
   font-family: var(--font-sans);
+  /* Do NOT set color here, let Tailwind handle text color */
 }
 
 /* Add smooth transitions for dark mode */

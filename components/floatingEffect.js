@@ -12,6 +12,7 @@ import {
   SiTailwindcss,
 } from 'react-icons/si';
 import Experience from './experience';
+import { BurstText } from './Portfoliohighlights';
 
 const floatingVariants = {
   floating: {
@@ -240,8 +241,8 @@ export default function FloatingEffects() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white">Skills</h2>
-            <p className="text-gray-600 dark:text-white">
+            <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white"><BurstText text="Skills" /></h2>
+            <p className="text-gray-700 dark:text-gray-200">
               Successfully shipped solutions using the following technologies.
             </p>
           </motion.div>
@@ -254,7 +255,7 @@ export default function FloatingEffects() {
         className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
       >
         <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-10">
-          My Experience
+          <BurstText text="My Experience" />
         </h2>
 
         {/* Vertical timeline line (scroll animated) - ENHANCED */}

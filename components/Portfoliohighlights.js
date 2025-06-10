@@ -86,6 +86,8 @@ const BurstText = ({ text }) => (
   </span>
 );
 
+export { BurstText };
+
 export default function PortfolioHighlights({ filter = 'All' }) {
   const [activeProject, setActiveProject] = useState(null);
   const [mobileIndex, setMobileIndex] = useState(0);
