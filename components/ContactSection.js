@@ -47,7 +47,7 @@ export default function ContactSection() {
             <BurstText text="Connect" />
           </span>
         </h2>
-        <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-zinc-500 dark:text-zinc-300 max-w-2xl mx-auto">
           Ready to bring your next project to life? Let's discuss how we can work together.
         </p>
       </div>

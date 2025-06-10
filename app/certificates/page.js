@@ -189,7 +189,7 @@ export default function CertificatesPage() {
                   <img src={cert.image} alt={cert.title} className="w-40 h-40 object-cover rounded-lg mb-3 border-2 border-red-200 dark:border-red-400 shadow" />
                   <div className="font-semibold text-lg text-center mb-1">{cert.title}</div>
                   <div className="text-sm text-zinc-500 dark:text-zinc-300 text-center mb-1">{cert.issuer}</div>
-                  <div className="text-xs text-zinc-400 dark:text-zinc-400">{cert.date}</div>
+                  <div className="text-xs text-zinc-500 dark:text-zinc-400">{cert.date}</div>
                 </div>
               ))}
             </div>
