@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import ParticlesBg from './ParticlesBg';
 import HeroFloatingIcons from './heroFloatingIcons';
-import Image from 'next/image';
+import SunMoonToggle from './SunMoonToggle';
+import { useTheme } from 'next-themes';
 
 // Animation variants
 const fadeInUp = {
@@ -22,6 +23,23 @@ const fadeIn = {
   visible: { opacity: 1, transition: { duration: 0.8, ease: 'easeOut' } },
 };
 
+const titleVariants = {
+  enter: {
+    y: 20,
+    opacity: 0
+  },
+  center: {
+    zIndex: 1,
+    y: 0,
+    opacity: 1
+  },
+  exit: {
+    zIndex: 0,
+    y: -20,
+    opacity: 0
+  }
+};
+
 // Shuffle utility
 const shuffleArray = (array) => {
   const result = [...array];
@@ -36,7 +54,7 @@ const BurstLetter = ({ char, index }) => {
   const [isBursting, setIsBursting] = useState(false);
   return (
     <span
-      className={`inline-block ${isBursting ? 'animate-burst' : ''}`}
+      className={`inline-block text-black dark:text-white ${isBursting ? 'animate-burst' : ''}`}
       onMouseEnter={() => {
         setIsBursting(true);
         setTimeout(() => setIsBursting(false), 1000);
@@ -49,29 +67,36 @@ const BurstLetter = ({ char, index }) => {
 };
 
 const BurstText = ({ text }) => (
-  <span className="cursor-pointer">
+  <span className="cursor-pointer text-black dark:text-white">
     {text.split('').map((char, index) => (
       <BurstLetter key={index} char={char} index={index} />
     ))}
   </span>
 );
 
+function Sun({ onClick }) {
+  return (
+    <mesh onClick={onClick}>
+      <sphereGeometry args={[1, 32, 32]} />
+      <meshStandardMaterial emissive="yellow" color="yellow" />
+    </mesh>
+  );
+}
+
+function Moon({ onClick }) {
+  return (
+    <mesh onClick={onClick}>
+      <sphereGeometry args={[1, 32, 32]} />
+      <meshStandardMaterial color="white" />
+    </mesh>
+  );
+}
+
 export default function HeroSection() {
   const titles = ['Frontend Developer', 'UI/UX Designer'];
   const [titleIndex, setTitleIndex] = useState(0);
-  const [isChanging, setIsChanging] = useState(false);
   const titleCount = titles.length;
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsChanging(true);
-      setTimeout(() => {
-        setTitleIndex((prev) => (prev + 1) % titleCount);
-        setIsChanging(false);
-      }, 500);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [titleCount]);
+  const { theme, setTheme } = useTheme();
 
   // Scroll-triggered animation controls
   const ref = useRef(null);
@@ -84,10 +109,17 @@ export default function HeroSection() {
     }
   }, [isInView, controls]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTitleIndex((prev) => (prev + 1) % titleCount);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [titleCount]);
+
   return (
     <section
       ref={ref}
-      className="min-h-screen flex items-center relative overflow-hidden py-16 md:py-24 lg:py-32"
+      className="min-h-screen flex items-center relative overflow-hidden py-16 md:py-24 lg:py-32 bg-gray-100 dark:bg-zinc-900"
     >
       <ParticlesBg />
       <HeroFloatingIcons />
@@ -100,21 +132,28 @@ export default function HeroSection() {
           animate={controls}
           variants={fadeInUp}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight whitespace-nowrap">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight whitespace-nowrap text-black dark:text-white">
             <BurstText text="John Smile Mella" />
           </h1>
 
-          <div className="h-20 md:h-24 lg:h-28 flex items-center justify-center md:justify-start">
-            <h2
-              className={`text-4xl md:text-5xl lg:text-6xl font-extrabold text-black transition-opacity duration-500 ${
-                isChanging ? 'opacity-0' : 'opacity-100'
-              }`}
+          <div className="h-28 md:h-32 lg:h-36 flex items-center justify-center md:justify-start overflow-hidden">
+            <motion.h2
+              key={titleIndex}
+              variants={titleVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                y: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.4 }
+              }}
+              className="w-full text-4xl md:text-5xl lg:text-6xl font-extrabold text-black dark:text-white text-center md:text-left leading-[1.15]"
             >
               {titles[titleIndex]}
-            </h2>
+            </motion.h2>
           </div>
 
-          <p className="text-lg md:text-xl lg:text-2xl font-semibold">
+          <p className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 dark:text-white">
             <BurstText text="Delivering pixel-perfect frontend development with UX insight." />
           </p>
 
@@ -125,7 +164,7 @@ export default function HeroSection() {
             transition={{ delay: 0.5 }}
           >
             <Link href="#contact">
-              <span className="bg-gradient-to-r from-red-600 via-red-500 to-red-800 text-white font-bold rounded-full py-3 px-8 block text-center shadow-lg hover:brightness-110 transition-all duration-300 animate-subtlePulse">
+              <span className="bg-gradient-to-r from-red-600 via-red-500 to-red-800 text-white dark:text-white font-bold rounded-full py-3 px-8 block text-center shadow-lg hover:brightness-110 transition-all duration-300 animate-subtlePulse">
                 Hire Me
               </span>
             </Link>
@@ -139,14 +178,8 @@ export default function HeroSection() {
           animate={controls}
           variants={fadeInRight}
         >
-          <div className="w-74 h-74 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden shadow-lg border-4 border-gray-300">
-            <Image
-              src="/akosismile.JPG"
-              alt="Profile"
-              className="w-full h-full object-cover"
-              height={200}
-              width={200}
-            />
+          <div className="w-74 h-74 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
+            <SunMoonToggle />
           </div>
         </motion.div>
       </div>

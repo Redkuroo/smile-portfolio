@@ -2,6 +2,8 @@
 import { useCallback } from 'react';
 import Particles from 'react-tsparticles';
 import { loadSlim } from 'tsparticles-slim';
+import { useTheme } from 'next-themes';
+import { useState, useEffect } from 'react';
 
 export default function ParticlesBackground() {
   const particlesInit = useCallback(async (engine) => {
@@ -9,16 +11,22 @@ export default function ParticlesBackground() {
     await loadSlim(engine);
   }, []);
 
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+  const bgColor = theme === 'dark' ? '#18181b' : '#f3f4f6';
+
   return (
     <Particles
       id="tsparticles"
       init={particlesInit}
       className="absolute inset-0 w-full h-full z-0 pointer-events-none bg"
+      style={{ background: bgColor }}
       options={{
-        fullScreen: true,
         background: {
           color: {
-            value: 'transparent',
+            value: bgColor,
           },
         },
         fpsLimit: 60,

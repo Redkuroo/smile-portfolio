@@ -2,121 +2,43 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-
+import { FaHome, FaUser, FaFolderOpen, FaEnvelope } from 'react-icons/fa';
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false); // Add mounted state
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    setMounted(true); // Set mounted to true after mount
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Prevent hydration mismatch by not rendering nav until mounted
+  useEffect(() => { setMounted(true); }, []);
   if (!mounted) return null;
 
+  // Define nav items for your pages
+  const navItems = [
+    { label: 'Home', href: '/', icon: <FaHome size={22} /> },
+    { label: 'About', href: '/about', icon: <FaUser size={22} /> },
+    { label: 'Projects', href: '/portfolio', icon: <FaFolderOpen size={22} /> },
+    { label: 'Contact', href: '/#contact', icon: <FaEnvelope size={22} /> },
+  ];
+
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
-      scrolled ? 'bg-white/80 backdrop-blur-md shadow-lg ' : 'bg-transparent'
-    }`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-extrabold bg-gradient-to-r from-red-600 via-red-500 to-red-800 bg-clip-text text-transparent tracking-tight hover:scale-105 transition-transform">
-            Logo
-            My Logo
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
-            {[
-  { text: "Profile", href: "/#profile" },
-  { text: "About", href: "/about" }, // This is a separate page now
-  { text: "Portfolio", href: "/portfolio" },
-  { text: "Contact", href: "/#contact" },
-].map(({ text, href }) => (
-  <NavLink key={text} href={href} text={text} current={pathname === href || pathname === `/${text.toLowerCase()}`} />
-))
-}
-            <a
-              href="/cv.pdf"
-              download
-              className="bg-gradient-to-r from-red-600 via-red-500 to-red-800 text-white font-bold rounded-full py-2 px-6 shadow-lg hover:scale-105 transition-all duration-300"
-            >
-              Download Resume
-            </a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded text-gray-800 focus:outline-none hover:text-red-600 transition-colors"
-            >
-              <span className="sr-only">Toggle Menu</span>
-              <div className={`space-y-1 transition-all ${mobileMenuOpen ? 'rotate-45' : ''}`}>
-                <span className="block h-0.5 w-6 bg-current"></span>
-                <span className={`block h-0.5 w-6 bg-current ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
-                <span className="block h-0.5 w-6 bg-current"></span>
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Nav */}
-      <div className={`md:hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-screen' : 'max-h-0 overflow-hidden'}`}>
-        <div className="bg-white/90 backdrop-blur-md shadow-md rounded-b-xl mx-4 p-4 space-y-4">
-          {[
-  { text: "Profile", href: "/#profile" },
-  { text: "About", href: "/about" },
-  { text: "Portfolio", href: "/#portfolio" },
-  { text: "Contact", href: "/#contact" },
-].map(({ text, href }) => (
-  <MobileNavLink key={text} href={href} text={text} onClick={() => setMobileMenuOpen(false)} />
-))
-}
-          <a
-            href="/cv.pdf"
-            download
-            className="block text-center w-full bg-gradient-to-r from-red-600 to-gray-900 text-white font-bold py-2 rounded-full shadow"
-          >
-            Download Resume
-          </a>
-        </div>
+    <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4">
+      <div className="flex justify-between items-center w-full rounded-full bg-transparent shadow-xl border border-zinc-700/20 dark:border-zinc-200/10 backdrop-blur-md py-2 px-4">
+        {navItems.map(({ label, href, icon }) => {
+          const isActive =
+            (href === '/' && pathname === '/') ||
+            (href !== '/' && pathname.startsWith(href.replace('/#', '/')));
+          return (
+            <Link key={label} href={href} className="focus:outline-none flex-1 flex justify-center">
+              <button
+                className={`flex flex-col items-center justify-center transition-all duration-200 rounded-full p-2 ${isActive ? 'text-red-500 bg-zinc-100 dark:bg-zinc-800 shadow' : 'text-zinc-500 dark:text-zinc-300 hover:text-red-500'}`}
+                aria-label={label}
+              >
+                {icon}
+                {/* Optionally show label for active only */}
+                {/* {isActive && <span className="text-xs font-semibold mt-1">{label}</span>} */}
+              </button>
+            </Link>
+          );
+        })}
       </div>
     </nav>
-  );
-}
-
-function NavLink({ href, text, current }) {
-  return (
-    <Link
-      href={href}
-      className={`relative font-medium transition-all duration-300 group text-gray-700 hover:text-red-600 ${
-        current ? 'text-red-600' : ''
-      }`}
-    >
-      {text}
-      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
-    </Link>
-  );
-}
-
-function MobileNavLink({ href, text, onClick }) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="block text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md font-medium"
-    >
-      {text}
-    </Link>
   );
 }

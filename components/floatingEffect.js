@@ -180,7 +180,7 @@ export default function FloatingEffects() {
               }}
             >
               <motion.div
-                className="bg-white rounded-full w-14 h-14 p-2 shadow-md flex items-center justify-center text-gray-400"
+                className="bg-white dark:bg-zinc-800 rounded-full w-14 h-14 p-2 shadow-md flex items-center justify-center text-gray-400"
                 initial={{ scale: 1 }}
                 animate={{ scale: rearranged ? 0.7 : 1 }}
                 transition={{ duration: 0.5 }}
@@ -201,7 +201,7 @@ export default function FloatingEffects() {
           {iconComponents.map(({ Icon, color, label }, idx) => (
             <motion.div
               key={idx}
-              className="w-24 h-28 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center p-3 bg-white shadow-sm"
+              className="w-24 h-28 rounded-xl border-2 border-dashed border-gray-300 dark:border-zinc-700 flex flex-col items-center justify-center p-3 bg-white dark:bg-zinc-800 shadow-sm"
               layout
               transition={{ layout: { duration: 0.8, ease: 'easeInOut' } }}
             >
@@ -209,7 +209,7 @@ export default function FloatingEffects() {
                 <>
                   <motion.div
                     layoutId={`icon-${idx}`}
-                    className={baseIconStyle}
+                    className={`${baseIconStyle} dark:bg-zinc-800`}
                     style={{ color }}
                     transition={{
                       type: 'spring',
@@ -220,7 +220,7 @@ export default function FloatingEffects() {
                     <Icon size={28} />
                   </motion.div>
                   <motion.span
-                    className="mt-2 text-sm text-gray-700 text-center"
+                    className="mt-2 text-sm text-gray-700 dark:text-white text-center"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
@@ -240,8 +240,8 @@ export default function FloatingEffects() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <h2 className="text-3xl font-bold mb-4 text-gray-800">Skills</h2>
-            <p className="text-gray-600">
+            <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white">Skills</h2>
+            <p className="text-gray-600 dark:text-white">
               Successfully shipped solutions using the following technologies.
             </p>
           </motion.div>

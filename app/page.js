@@ -7,7 +7,7 @@ import PortfolioHighlights from '../components/Portfoliohighlights';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen bg-gray-100 dark:bg-zinc-900 text-black dark:text-white flex flex-col">
       <Navbar />
 
       <div className="flex flex-1 flex-col lg:flex-row">
@@ -30,7 +30,7 @@ export default function Home() {
       </div>
 
       <footer className="mt-8 text-gray-500 text-sm text-center p-4">
-        &copy; 2025 John Smile Mella. All rights reserved.
+        <span className="dark:text-gray-400">&copy; 2025 John Smile Mella. All rights reserved.</span>
       </footer>
     </div>
   );

@@ -8,9 +8,9 @@ import About from '../../components/about';
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-zinc-900 text-gray-800 dark:text-white">
       {/* Header with Navigation */}
-      <header className="sticky top-0 z-50 bg-gray-100">
+      <header className="sticky top-0 z-50 bg-gray-100 dark:bg-zinc-900">
         <Navbar />
       </header>
 
@@ -32,7 +32,7 @@ export default function AboutPage() {
       </div>
 
       {/* Sticky Footer */}
-      <footer className="mt-auto text-gray-500 text-sm text-center p-4 bg-gray-100 border-t border-gray-200">
+      <footer className="mt-auto text-gray-500 dark:text-gray-400 text-sm text-center p-4 bg-gray-100 dark:bg-zinc-900 border-t border-gray-200 dark:border-zinc-700">
         <p>© {new Date().getFullYear()} John Smile Mella. All rights reserved.</p>
       </footer>
     </div>
