@@ -145,11 +145,11 @@ export default function PortfolioHighlights({ filter = 'All' }) {
               alt={projects[mobileIndex].title}
               width={400}
               height={200}
-              className="object-cover w-full h-36"
+              className="object-cover w-full h-32 sm:h-36"
             />
-            <div className="p-5">
-              <div className="flex items-center justify-between">
-                <h3 className="text-base font-medium tracking-tight leading-snug break-words">
+            <div className="p-3 sm:p-5">
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="text-sm sm:text-base font-medium tracking-tight leading-snug break-words">
                   {projects[mobileIndex].title}
                 </h3>
                 <button
@@ -158,7 +158,7 @@ export default function PortfolioHighlights({ filter = 'All' }) {
                       activeProject === projects[mobileIndex].id ? null : projects[mobileIndex].id
                     )
                   }
-                  className="bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition cursor-pointer"
+                  className="flex-shrink-0 bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition duration-300 ease-in-out cursor-pointer"
                   aria-label="More info"
                 >
                   <FaInfoCircle size={16} />
@@ -174,23 +174,23 @@ export default function PortfolioHighlights({ filter = 'All' }) {
                   animate={{ y: 0 }}
                   exit={{ y: '100%' }}
                   transition={{ duration: 0.4 }}
-                  className="absolute left-0 bottom-0 w-full bg-white dark:bg-zinc-900 border-t border-gray-300 dark:border-zinc-700 rounded-t-2xl z-30 p-4 text-sm shadow-lg max-h-[80%] overflow-y-auto"
+                  className="absolute left-0 bottom-0 w-full bg-white dark:bg-zinc-900 border-t border-gray-300 dark:border-zinc-700 rounded-t-2xl z-30 p-4 sm:p-6 text-sm shadow-lg max-h-[85vh] overflow-y-auto"
                 >
                   <button
                     onClick={() => setActiveProject(null)}
-                    className="absolute top-2.5 right-4 p-1.5 rounded-full cursor-pointer hover:scale-110 transition"
+                    className="absolute top-3 right-4 p-1.5 rounded-full cursor-pointer hover:scale-110 transition duration-300 ease-in-out text-gray-600 dark:text-gray-300"
                     aria-label="Close project details"
                   >
                     ✕
                   </button>
                   <div className="mt-8 space-y-4">
                     <div>
-                      <h4 className="text-base font-semibold mb-1">Description</h4>
-                      <p className="text-gray-600 leading-relaxed">{projects[mobileIndex].description}</p>
+                      <h4 className="text-base sm:text-lg font-semibold mb-2">Description</h4>
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">{projects[mobileIndex].description}</p>
                     </div>
                     <div>
-                      <h4 className="text-base font-semibold mb-1">Tech Stack</h4>
-                      <div className="flex gap-4 text-2xl text-gray-700">
+                      <h4 className="text-base sm:text-lg font-semibold mb-2">Tech Stack</h4>
+                      <div className="flex gap-4 text-xl sm:text-2xl text-gray-700 dark:text-gray-300">
                         {projects[mobileIndex].techStack.map((Icon, i) => (
                           <Icon key={i} className="hover:text-red-500 transition" />
                         ))}
@@ -200,7 +200,7 @@ export default function PortfolioHighlights({ filter = 'All' }) {
                       href={projects[mobileIndex].url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition text-white font-semibold text-center shadow"
+                      className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition duration-300 ease-in-out text-white font-semibold text-center shadow"
                     >
                       View Project
                     </a>
@@ -258,7 +258,7 @@ export default function PortfolioHighlights({ filter = 'All' }) {
                             activeProject === project.id ? null : project.id
                           )
                         }
-                        className="ml-2 bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition cursor-pointer"
+                        className="ml-2 bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition duration-300 ease-in-out cursor-pointer"
                         aria-label="More info"
                       >
                         <FaInfoCircle size={16} />
@@ -277,7 +277,7 @@ export default function PortfolioHighlights({ filter = 'All' }) {
                       >
                         <button
                           onClick={() => setActiveProject(null)}
-                          className="absolute top-2.5 right-2.5 p-1.5 rounded-full cursor-pointer hover:scale-110 transition"
+                          className="absolute top-2.5 right-2.5 p-1.5 rounded-full cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
                           aria-label="Close project details"
                         >
                           ✕
@@ -299,7 +299,7 @@ export default function PortfolioHighlights({ filter = 'All' }) {
                             href={project.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition text-white font-semibold text-center shadow"
+                            className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition duration-300 ease-in-out text-white font-semibold text-center shadow"
                           >
                             View Project
                           </a>

@@ -7,20 +7,22 @@ import HeroFloatingIcons from './heroFloatingIcons';
 import SunMoonToggle from './SunMoonToggle';
 import { useTheme } from 'next-themes';
 
+const DEFAULT_MOTION = { duration: 0.4, ease: 'easeInOut' };
+
 // Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, transition: DEFAULT_MOTION },
 };
 
 const fadeInRight = {
   hidden: { opacity: 0, x: 40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+  visible: { opacity: 1, x: 0, transition: DEFAULT_MOTION },
 };
 
 const fadeIn = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.8, ease: 'easeOut' } },
+  visible: { opacity: 1, transition: DEFAULT_MOTION },
 };
 
 const titleVariants = {
@@ -132,7 +134,7 @@ export default function HeroSection() {
           animate={controls}
           variants={fadeInUp}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight whitespace-nowrap text-black dark:text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight md:whitespace-nowrap text-black dark:text-white break-words">
             <BurstText text="John Smile Mella" />
           </h1>
 
@@ -147,13 +149,13 @@ export default function HeroSection() {
                 y: { type: "spring", stiffness: 300, damping: 30 },
                 opacity: { duration: 0.4 }
               }}
-              className="w-full text-4xl md:text-5xl lg:text-6xl font-extrabold text-black dark:text-white text-center md:text-left leading-[1.15]"
+              className="w-full text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black dark:text-white text-center md:text-left leading-[1.15] break-words"
             >
               {titles[titleIndex]}
             </motion.h2>
           </div>
 
-          <p className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 dark:text-white">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 dark:text-white break-words">
             <BurstText text="Delivering pixel-perfect frontend development with UX insight." />
           </p>
 

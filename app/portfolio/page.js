@@ -80,7 +80,7 @@ export default function PortfolioPage() {
                 <button
                   key={tab}
                   onClick={() => setFilter(tab)}
-                  className={`px-4 py-2 rounded-full font-medium transition-shadow duration-300 ${
+                  className={`px-4 py-2 rounded-full font-medium transition-shadow duration-300 ease-in-out ${
                     filter === tab
                       ? 'bg-red-500 text-white shadow-md scale-105'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -120,7 +120,7 @@ export default function PortfolioPage() {
                           onClick={() =>
                             setActiveProject(activeProject === project.id ? null : project.id)
                           }
-                          className="ml-2 bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition duration-200 cursor-pointer"
+                          className="ml-2 bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition duration-300 ease-in-out cursor-pointer"
                           aria-label={`Toggle details for ${project.title}`}
                         >
                           <FaInfoCircle size={16} />
@@ -142,7 +142,7 @@ export default function PortfolioPage() {
                         >
                           <button
                             onClick={() => setActiveProject(null)}
-                            className="cursor-pointer absolute top-2.5 right-2.5 p-1.5 rounded-full hover:bg-gray-200 transition duration-200"
+                            className="cursor-pointer absolute top-2.5 right-2.5 p-1.5 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out"
                             aria-label="Close project details"
                           >
                             ✕
@@ -170,7 +170,7 @@ export default function PortfolioPage() {
                               href={project.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition duration-200 text-white font-semibold text-center shadow"
+                              className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition duration-300 ease-in-out text-white font-semibold text-center shadow"
                             >
                               View Project
                             </a>
