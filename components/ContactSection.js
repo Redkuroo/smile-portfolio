@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { FaPaperPlane, FaUser, FaEnvelope, FaCommentDots, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { BurstText } from './Portfoliohighlights';
 
 export default function ContactSection() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -41,8 +42,10 @@ export default function ContactSection() {
       {/* Header */}
       <div className="mb-6 text-center">
         <h2 className="text-5xl md:text-6xl font-black mb-2">
-          <span className="text-zinc-900 dark:text-white">Let's</span>
-          <span className="text-transparent stroke-black dark:stroke-white stroke-2 outline-text ml-2">Connect</span>
+          <span className="text-red-600 dark:text-red-400">Let's</span>
+          <span className="ml-2 text-red-700 dark:text-red-500">
+            <BurstText text="Connect" />
+          </span>
         </h2>
         <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto">
           Ready to bring your next project to life? Let's discuss how we can work together.
@@ -52,13 +55,13 @@ export default function ContactSection() {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
         <button
           onClick={() => setModalOpen(true)}
-          className="flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold px-8 py-4 rounded shadow hover:scale-105 transition-all duration-200 focus:outline-none"
+          className="flex items-center gap-2 bg-red-600 dark:bg-red-500 text-white font-semibold px-8 py-4 rounded shadow hover:scale-105 transition-all duration-200 focus:outline-none"
         >
           <FaPaperPlane /> Send Message <span className="ml-2">→</span>
         </button>
         <a
           href="#" // Replace with your scheduling link if available
-          className="flex items-center gap-2 border-2 border-zinc-900 dark:border-white text-zinc-900 dark:text-white font-semibold px-8 py-4 rounded shadow hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-200 focus:outline-none"
+          className="flex items-center gap-2 border-2 border-red-600 dark:border-red-500 text-red-700 dark:text-red-400 font-semibold px-8 py-4 rounded shadow hover:bg-red-50 dark:hover:bg-red-900 transition-all duration-200 focus:outline-none"
         >
           <FaPhoneAlt /> Schedule Call
         </a>
