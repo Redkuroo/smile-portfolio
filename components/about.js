@@ -6,7 +6,7 @@ import ParticlesBg from './ParticlesBg';
 export default function About() {
   return (
     <section 
-      className="py-8 sm:py-12 md:py-16 text-gray-800 dark:text-white relative"
+      className="py-8 sm:py-12 md:py-16 text-gray-900 dark:text-white relative"
       aria-labelledby="about-heading"
     >
       <div className="absolute inset-0 z-0" aria-hidden="true">
@@ -33,10 +33,10 @@ export default function About() {
           role="region"
           aria-label="About me description"
         >
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-900 dark:text-white">
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-900 dark:text-gray-100">
             Hello! I'm a front-end developer and UI/UX designer based in Davao City, Philippines. I specialize in creating clean, responsive, and engaging user interfaces using tools like React and Tailwind CSS. I'm passionate about crafting designs that are not only visually appealing but also intuitive and user-friendly.
           </p>
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-900 dark:text-white">
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-900 dark:text-gray-100">
             Beyond coding, I'm a proud Portland Trail Blazers fan and a Mobile Legends gamer, thriving on both competition and creativity. I'm always learning, growing, and pushing boundaries—whether through design, development, or a clutch comeback in ranked matches.
           </p>
         </motion.div>

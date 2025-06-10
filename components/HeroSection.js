@@ -155,7 +155,7 @@ export default function HeroSection() {
             </motion.h2>
           </div>
 
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 dark:text-white break-words">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 dark:text-gray-100 break-words">
             <BurstText text="Delivering pixel-perfect frontend development with UX insight." />
           </p>
 

@@ -242,7 +242,7 @@ export default function FloatingEffects() {
             transition={{ delay: 0.8 }}
           >
             <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white"><BurstText text="Skills" /></h2>
-            <p className="text-gray-700 dark:text-gray-200">
+            <p className="text-gray-700 dark:text-gray-100">
               Successfully shipped solutions using the following technologies.
             </p>
           </motion.div>

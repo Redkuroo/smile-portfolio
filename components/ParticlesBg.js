@@ -15,7 +15,7 @@ export default function ParticlesBackground() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
-  const bgColor = theme === 'dark' ? '#18181b' : '#f3f4f6';
+  const bgColor = theme === 'dark' ? '#2A2E36' : '#f3f4f6';
 
   return (
     <Particles

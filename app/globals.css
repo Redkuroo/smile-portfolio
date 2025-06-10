@@ -10,7 +10,7 @@
 }
 
 html.dark {
-  --background: #0a0a0a;
+  --background: #23272f;
   --foreground: #ededed;
   --color-background: var(--background);
   --color-foreground: var(--foreground);

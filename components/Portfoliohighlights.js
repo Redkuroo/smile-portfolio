@@ -123,7 +123,7 @@ export default function PortfolioHighlights({ filter = 'All' }) {
     <section className="relative py-6 sm:py-8 text-black dark:text-white overflow-hidden min-h-[60vh]">
       <ParticlesBg />
       <div className="relative z-10 container mx-auto px-2 sm:px-4 max-w-6xl">
-        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center tracking-tight">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center tracking-tight text-black dark:text-white">
           <BurstText text={filter === 'All' ? 'Portfolio Highlghts' : `${filter} Projects`} />
         </h2>
 
