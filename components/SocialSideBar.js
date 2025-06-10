@@ -2,7 +2,7 @@
 import {
   FaFacebookF,
   FaInstagram,
-  FaTiktok,
+  FaBehance,
   FaLinkedinIn,
   FaGithub,
 } from 'react-icons/fa';
@@ -11,11 +11,11 @@ import { motion } from 'framer-motion';
 export default function SocialSideBar() {
   const iconSize = 20;
   const links = [
-    { href: 'https://facebook.com', label: 'Facebook', icon: <FaFacebookF size={iconSize} /> },
-    { href: 'https://instagram.com', label: 'Instagram', icon: <FaInstagram size={iconSize} /> },
-    { href: 'https://tiktok.com', label: 'TikTok', icon: <FaTiktok size={iconSize} /> },
-    { href: 'https://linkedin.com', label: 'LinkedIn', icon: <FaLinkedinIn size={iconSize} /> },
-    { href: 'https://github.com', label: 'GitHub', icon: <FaGithub size={iconSize} /> },
+    { href: 'https://www.facebook.com/js.mella.9', label: 'Facebook', icon: <FaFacebookF size={iconSize} /> },
+    { href: 'https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fj_smileeeee%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExS0M5WVhVZXhiNGM1QWVDSgEe9hYk-IH29xuScdT-1Zv1ZKvzJkvqrfEmFsuFJrcDWtIYGfCBbiqdvevUUDA_aem_6KOg0EWMdUe7WbG1HoWBrQ&h=AT2bSLBh3G7m3rXpYMAI0WU62iaq9g2957JRcuyoxY5RqXFuwOmjwBhBROMWcZuM-JXcsaEGmNwRLNPAk6Mo3d4SmxhW0hdh3yP9DXUnCcOpMkU8M9k2ACD_mYLBVXYZxQpGCkJNkw9vCsVsH34t', label: 'Instagram', icon: <FaInstagram size={iconSize} /> },
+    { href: 'https://www.behance.net/smilemella', label: 'Behance', icon: <FaBehance size={iconSize} /> },
+    { href: 'https://www.linkedin.com/in/john-smile-mella-064a12347/', label: 'LinkedIn', icon: <FaLinkedinIn size={iconSize} /> },
+    { href: 'https://github.com/Redkuroo', label: 'GitHub', icon: <FaGithub size={iconSize} /> },
   ];
 
   return (
