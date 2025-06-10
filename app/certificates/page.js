@@ -162,7 +162,7 @@ export default function CertificatesPage() {
             </h2>
             
             {/* Category Filter */}
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <div className="sticky top-0 z-20 flex flex-wrap justify-center gap-4 mb-8 bg-gray-100 dark:bg-zinc-900 py-2">
               {categories.map((category) => (
                 <button
                   key={category.id}
