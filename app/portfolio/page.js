@@ -120,7 +120,7 @@ export default function PortfolioPage() {
                           onClick={() =>
                             setActiveProject(activeProject === project.id ? null : project.id)
                           }
-                          className="ml-2 bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition duration-200"
+                          className="ml-2 bg-gradient-to-r from-red-600 to-red-500 text-white p-1.5 rounded-full shadow hover:scale-110 transition duration-200 cursor-pointer"
                           aria-label={`Toggle details for ${project.title}`}
                         >
                           <FaInfoCircle size={16} />
