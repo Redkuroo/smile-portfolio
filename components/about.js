@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaCertificate } from 'react-icons/fa';
+import { BurstText } from './Portfoliohighlights';
 
 const certificates = [
   {
@@ -153,11 +154,11 @@ export default function About() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true }}
         >
-          About Me
+          <BurstText text="About Me" />
         </motion.h2>
 
         <motion.div
-          className="max-w-3xl mx-auto space-y-6 text-center"
+          className="max-w-3xl mx-auto space-y-6 text-center bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl shadow p-8 mb-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
@@ -173,7 +174,9 @@ export default function About() {
 
         {/* Certificates Section */}
         <div className="mt-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-red-600 dark:text-red-400 mb-6 flex items-center gap-2"><FaCertificate /> Certificates</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+            <BurstText text="Certificates" />
+          </h2>
           
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
