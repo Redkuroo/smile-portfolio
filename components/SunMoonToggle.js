@@ -25,6 +25,21 @@ function Sun({ onClick }) {
           <meshStandardMaterial color="#fff700" emissive="#fff700" emissiveIntensity={2} transparent opacity={0.7} />
         </mesh>
       ))}
+      {/* Sun smiley face */}
+      {/* Eyes */}
+      <mesh position={[-0.35, 0.35, 0.98]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#222" />
+      </mesh>
+      <mesh position={[0.35, 0.35, 0.98]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#222" />
+      </mesh>
+      {/* Mouth (smile) */}
+      <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.15, 0.98]}>
+        <torusGeometry args={[0.28, 0.035, 16, 32, Math.PI]} />
+        <meshStandardMaterial color="#222" />
+      </mesh>
     </group>
   );
 }
@@ -43,6 +58,21 @@ function Moon({ onClick }) {
       <mesh>
         <sphereGeometry args={[1.08, 64, 64]} />
         <meshBasicMaterial color="#fff" transparent opacity={0.08} />
+      </mesh>
+      {/* Moon smiley face */}
+      {/* Eyes */}
+      <mesh position={[-0.35, 0.35, 0.98]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#222" />
+      </mesh>
+      <mesh position={[0.35, 0.35, 0.98]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#222" />
+      </mesh>
+      {/* Mouth (smile) */}
+      <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.15, 0.98]}>
+        <torusGeometry args={[0.28, 0.035, 16, 32, Math.PI]} />
+        <meshStandardMaterial color="#222" />
       </mesh>
     </group>
   );

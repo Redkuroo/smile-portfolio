@@ -142,7 +142,7 @@ export default function PortfolioPage() {
                         >
                           <button
                             onClick={() => setActiveProject(null)}
-                            className="absolute top-2.5 right-2.5 p-1.5 rounded-full hover:bg-gray-200 transition duration-200"
+                            className="cursor-pointer absolute top-2.5 right-2.5 p-1.5 rounded-full hover:bg-gray-200 transition duration-200"
                             aria-label="Close project details"
                           >
                             ✕
