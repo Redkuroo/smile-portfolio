@@ -19,7 +19,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4">
+    <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4 ">
       <div className="flex justify-between items-center w-full rounded-full bg-transparent shadow-xl border border-zinc-700/20 dark:border-zinc-200/10 backdrop-blur-md py-2 px-4">
         {navItems.map(({ label, href, icon }) => {
           const isActive =
@@ -28,7 +28,7 @@ export default function Navbar() {
           return (
             <Link key={label} href={href} className="focus:outline-none flex-1 flex justify-center">
               <button
-                className={`flex flex-col items-center justify-center transition-all duration-200 rounded-full p-2 ${isActive ? 'text-red-500 bg-zinc-100 dark:bg-zinc-800 shadow' : 'text-zinc-500 dark:text-zinc-300 hover:text-red-500'}`}
+                className={`flex flex-col items-center justify-center transition-all duration-200 rounded-full p-2 ${isActive ? 'text-red-500 bg-zinc-100 dark:bg-zinc-800 shadow' : 'text-zinc-500 dark:text-zinc-300 hover:text-red-500 cursor-pointer'}`}
                 aria-label={label}
               >
                 {icon}
