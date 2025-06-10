@@ -42,8 +42,8 @@ export default function ContactSection() {
       {/* Header */}
       <div className="mb-6 text-center">
         <h2 className="text-5xl md:text-6xl font-black mb-2">
-          <span className="text-red-600 dark:text-red-400">Let's</span>
-          <span className="ml-2 text-red-700 dark:text-red-500">
+          <span className="text-gray-800 dark:text-white">Let's</span>
+          <span className="ml-2 text-gray-800 dark:text-white">
             <BurstText text="Connect" />
           </span>
         </h2>
