@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaCertificate } from 'react-icons/fa';
 import { BurstText } from './Portfoliohighlights';
+import ParticlesBg from './ParticlesBg';
 
 const certificates = [
   {
@@ -145,8 +146,11 @@ export default function About() {
   ];
 
   return (
-    <section className="py-16 text-gray-800 dark:text-white relative z-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+    <section className="py-16 text-gray-800 dark:text-white relative">
+      <div className="absolute inset-0 z-0">
+        <ParticlesBg />
+      </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10">
         <motion.h2
           className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 text-center tracking-tight text-black dark:text-white"
           initial={{ opacity: 0, y: 30 }}
