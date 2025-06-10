@@ -2,10 +2,10 @@
 import { Canvas } from '@react-three/fiber';
 import { useTheme } from 'next-themes';
 import { OrbitControls, SoftShadows } from '@react-three/drei';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-function Sun({ onClick }) {
+function Sun({ onClick, eyeOffset = [0, 0] }) {
   return (
     <group onClick={onClick} scale={2.5}>
       {/* Sun core */}
@@ -27,11 +27,11 @@ function Sun({ onClick }) {
       ))}
       {/* Sun smiley face */}
       {/* Eyes */}
-      <mesh position={[-0.35, 0.35, 0.98]}>
+      <mesh position={[-0.35 + eyeOffset[0], 0.35 + eyeOffset[1], 0.98]}>
         <sphereGeometry args={[0.08, 16, 16]} />
         <meshStandardMaterial color="#222" />
       </mesh>
-      <mesh position={[0.35, 0.35, 0.98]}>
+      <mesh position={[0.35 + eyeOffset[0], 0.35 + eyeOffset[1], 0.98]}>
         <sphereGeometry args={[0.08, 16, 16]} />
         <meshStandardMaterial color="#222" />
       </mesh>
@@ -44,7 +44,7 @@ function Sun({ onClick }) {
   );
 }
 
-function Moon({ onClick }) {
+function Moon({ onClick, eyeOffset = [0, 0] }) {
   // Use a subtle bump map for craters
   const bumpMap = new THREE.TextureLoader().load('https://threejs.org/examples/textures/moonbump1k.jpg');
   return (
@@ -61,11 +61,11 @@ function Moon({ onClick }) {
       </mesh>
       {/* Moon smiley face */}
       {/* Eyes */}
-      <mesh position={[-0.35, 0.35, 0.98]}>
+      <mesh position={[-0.35 + eyeOffset[0], 0.35 + eyeOffset[1], 0.98]}>
         <sphereGeometry args={[0.08, 16, 16]} />
         <meshStandardMaterial color="#222" />
       </mesh>
-      <mesh position={[0.35, 0.35, 0.98]}>
+      <mesh position={[0.35 + eyeOffset[0], 0.35 + eyeOffset[1], 0.98]}>
         <sphereGeometry args={[0.08, 16, 16]} />
         <meshStandardMaterial color="#222" />
       </mesh>
@@ -81,6 +81,8 @@ function Moon({ onClick }) {
 export default function SunMoonToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [eyeOffset, setEyeOffset] = useState([0, 0]);
+  const canvasRef = useRef(null);
 
   useEffect(() => setMounted(true), []);
 
@@ -88,13 +90,41 @@ export default function SunMoonToggle() {
     console.log('Current theme:', theme);
   }, [theme]);
 
+  // Eyes follow mouse anywhere on the screen
+  useEffect(() => {
+    function handleMouseMove(e) {
+      if (!canvasRef.current) return;
+      const rect = canvasRef.current.getBoundingClientRect();
+      // Get mouse position relative to the center of the canvas
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width / 2); // -1 to 1
+      const dy = (e.clientY - cy) / (rect.height / 2); // -1 to 1
+      // Clamp and scale
+      const maxOffset = 0.12;
+      setEyeOffset([
+        Math.max(-1, Math.min(1, dx)) * maxOffset,
+        Math.max(-1, Math.min(1, -dy)) * maxOffset,
+      ]);
+    }
+    function handleMouseLeave() {
+      setEyeOffset([0, 0]);
+    }
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
   if (!mounted) return null;
 
   const isDark = theme === 'dark';
 
   return (
-    <div className="w-full h-full cursor-pointer">
-      <Canvas camera={{ position: [0, 0, 6], fov: 50 }} shadows>
+    <div className="w-full h-full cursor-pointer" style={{ width: '100%', height: '100%' }}>
+      <Canvas ref={canvasRef} camera={{ position: [0, 0, 6], fov: 50 }} shadows>
         <SoftShadows />
         <ambientLight intensity={0.7} />
         <directionalLight
@@ -105,9 +135,9 @@ export default function SunMoonToggle() {
           shadow-mapSize-height={1024}
         />
         {isDark ? (
-          <Moon onClick={() => { console.log('Switching to light'); setTheme('light'); }} />
+          <Moon onClick={() => { console.log('Switching to light'); setTheme('light'); }} eyeOffset={eyeOffset} />
         ) : (
-          <Sun onClick={() => { console.log('Switching to dark'); setTheme('dark'); }} />
+          <Sun onClick={() => { console.log('Switching to dark'); setTheme('dark'); }} eyeOffset={eyeOffset} />
         )}
         <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>
