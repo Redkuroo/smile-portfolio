@@ -55,7 +55,7 @@ export default function ContactSection() {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
         <button
           onClick={() => setModalOpen(true)}
-          className="flex items-center gap-2 bg-red-600 dark:bg-red-500 text-white font-semibold px-8 py-4 rounded shadow hover:scale-105 transition-all duration-200 focus:outline-none"
+          className="flex items-center gap-2 bg-red-600 dark:bg-red-500 text-white font-semibold px-8 py-4 rounded shadow hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-400"
         >
           <FaPaperPlane /> Send Message <span className="ml-2">→</span>
         </button>
@@ -63,7 +63,7 @@ export default function ContactSection() {
           href="https://calendar.google.com/calendar/u/0/r/eventedit?text=Google+Meet+with+John Smile&details=Let's+connect+via+Google+Meet!&add=02jsmella@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 border-2 border-red-600 dark:border-red-500 text-red-700 dark:text-red-400 font-semibold px-8 py-4 rounded shadow hover:bg-red-50 dark:hover:bg-red-900 transition-all duration-200 focus:outline-none"
+          className="flex items-center gap-2 border-2 border-red-600 dark:border-red-500 text-red-700 dark:text-red-400 font-semibold px-8 py-4 rounded shadow hover:bg-red-50 dark:hover:bg-red-900 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-400"
         >
           <FaPhoneAlt /> Schedule Google Meet
         </a>
@@ -88,7 +88,7 @@ export default function ContactSection() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
           <div className="relative w-full max-w-lg bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl p-8 md:p-12 border border-zinc-200 dark:border-zinc-800">
             <button
-              className="absolute top-4 right-4 text-2xl text-zinc-500 hover:text-red-500 focus:outline-none"
+              className="absolute top-4 right-4 text-2xl text-zinc-500 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 active:scale-95 transition-all duration-200"
               onClick={() => { setModalOpen(false); setStatus('idle'); setError(''); }}
               aria-label="Close"
             >

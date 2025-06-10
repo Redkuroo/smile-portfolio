@@ -29,7 +29,7 @@ export default function Navbar() {
           return (
             <Link key={label} href={href} className="focus:outline-none flex-1 flex justify-center">
               <button
-                className={`flex flex-col items-center justify-center transition-all duration-200 rounded-full p-2 ${isActive ? 'text-red-500 bg-zinc-100 dark:bg-zinc-800 shadow' : 'text-zinc-500 dark:text-zinc-300 hover:text-red-500 cursor-pointer'}`}
+                className={`flex flex-col items-center justify-center transition-all duration-200 rounded-full p-2 ${isActive ? 'text-red-500 bg-zinc-100 dark:bg-zinc-800 shadow' : 'text-zinc-500 dark:text-zinc-300 hover:text-red-500 cursor-pointer'} active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-400`}
                 aria-label={label}
               >
                 {icon}
