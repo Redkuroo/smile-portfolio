@@ -60,7 +60,7 @@ export default function ContactSection() {
           <FaPaperPlane /> Send Message <span className="ml-2">→</span>
         </button>
         <a
-          href="https://calendar.google.com/calendar/u/0/r/eventedit?text=Google+Meet+with+Jheremiah&details=Let's+connect+via+Google+Meet!&add=02jsmella@gmail.com"
+          href="https://calendar.google.com/calendar/u/0/r/eventedit?text=Google+Meet+with+John Smile&details=Let's+connect+via+Google+Meet!&add=02jsmella@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 border-2 border-red-600 dark:border-red-500 text-red-700 dark:text-red-400 font-semibold px-8 py-4 rounded shadow hover:bg-red-50 dark:hover:bg-red-900 transition-all duration-200 focus:outline-none"
