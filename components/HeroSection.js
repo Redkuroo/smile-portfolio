@@ -165,9 +165,9 @@ export default function HeroSection() {
             variants={fadeIn}
             transition={{ delay: 0.5 }}
           >
-            <Link href="#contact">
+            <Link href="/UI-UX-Mella_1.pdf">
               <span className="bg-gradient-to-r from-red-600 via-red-500 to-red-800 text-white dark:text-white font-bold rounded-full py-3 px-8 block text-center shadow-lg hover:brightness-110 transition-all duration-300 animate-subtlePulse">
-                Hire Me
+                View CV
               </span>
             </Link>
           </motion.div>
