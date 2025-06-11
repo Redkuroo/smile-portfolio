@@ -38,7 +38,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="w-full flex flex-col items-center justify-center py-8 sm:py-12 md:py-16 px-4">
+    <section className="w-full flex flex-col items-center justify-center py-8 sm:py-12 md:py-16 px-4 bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-white">
       {/* Header */}
       <div className="mb-6 sm:mb-8 text-center">
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-2 sm:mb-3">
@@ -186,12 +186,6 @@ export default function ContactSection() {
         .outline-text {
           -webkit-text-stroke: 2px #000;
           text-stroke: 2px #000;
-        }
-        @media (prefers-color-scheme: dark) {
-          .outline-text {
-            -webkit-text-stroke: 2px #fff;
-            text-stroke: 2px #fff;
-          }
         }
       `}</style>
     </section>

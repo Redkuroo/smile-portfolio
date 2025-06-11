@@ -19,6 +19,7 @@ import {
 } from 'react-icons/si';
 import Image from 'next/image';
 import ParticlesBg from './ParticlesBg';
+import { useTheme } from 'next-themes';
 
 // Add a `category` field to each project
 const projects = [
@@ -66,7 +67,7 @@ const BurstLetter = ({ char, index }) => {
 
   return (
     <span
-      className={`inline-block ${isBursting ? 'animate-burst' : ''}`}
+      className={`inline-block${isBursting ? ' animate-burst' : ''}`}
       onMouseEnter={() => {
         setIsBursting(true);
         setTimeout(() => setIsBursting(false), 1000);
@@ -120,10 +121,10 @@ export default function PortfolioHighlights({ filter = 'All' }) {
   }
 
   return (
-    <section className="relative py-6 sm:py-8 text-black dark:text-white overflow-hidden min-h-[60vh]">
+    <section className="relative py-6 sm:py-8 bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-white overflow-hidden min-h-[60vh]">
       <ParticlesBg />
       <div className="relative z-10 container mx-auto px-2 sm:px-4 max-w-6xl">
-        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center tracking-tight text-black dark:text-white">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center tracking-tight text-gray-900 dark:text-white">
           <BurstText text={filter === 'All' ? 'Portfolio Highlghts' : `${filter} Projects`} />
         </h2>
 
@@ -138,7 +139,7 @@ export default function PortfolioHighlights({ filter = 'All' }) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.3 }}
-            className="w-full max-w-md bg-white dark:bg-zinc-800 rounded-2xl shadow-md border border-gray-200 dark:border-zinc-700 overflow-hidden group relative"
+            className="w-full max-w-md bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-md border border-gray-200 dark:border-zinc-700 overflow-hidden group relative"
           >
             <Image
               src={projects[mobileIndex].cover}
@@ -238,7 +239,7 @@ export default function PortfolioHighlights({ filter = 'All' }) {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="flex-shrink-0 w-64 sm:w-72 md:w-80 lg:w-96 bg-white dark:bg-zinc-800 rounded-2xl shadow-md border border-gray-200 dark:border-zinc-700 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition duration-300 relative"
+                  className="flex-shrink-0 w-64 sm:w-72 md:w-80 lg:w-96 bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-md border border-gray-200 dark:border-zinc-700 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition duration-300 relative"
                 >
                   <Image
                     src={project.cover}

@@ -58,7 +58,7 @@ export default function PortfolioPage() {
   }, [filter]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-zinc-900 text-gray-800 dark:text-white relative">
+    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-white relative">
       {/* Particles Background */}
       <div className="absolute inset-0 z-0">
         <ParticlesBg />
@@ -140,41 +140,7 @@ export default function PortfolioPage() {
                           role="dialog"
                           aria-labelledby={`project-title-${project.id}`}
                         >
-                          <button
-                            onClick={() => setActiveProject(null)}
-                            className="cursor-pointer absolute top-2.5 right-2.5 p-1.5 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out"
-                            aria-label="Close project details"
-                          >
-                            ✕
-                          </button>
-                          <div className="overflow-y-auto mt-10 space-y-4 max-h-[80%] pr-2">
-                            <div>
-                              <h4 id={`project-title-${project.id}`} className="text-base font-semibold mb-1">
-                                Description
-                              </h4>
-                              <p className="text-gray-600 leading-relaxed">{project.description}</p>
-                            </div>
-                            <div>
-                              <h4 className="text-base font-semibold mb-1">Tech Stack</h4>
-                              <div className="flex gap-4 text-2xl text-gray-700">
-                                {project.techStack.map((Icon, idx) => (
-                                  <Icon
-                                    key={idx}
-                                    className="hover:text-red-500 transition duration-200"
-                                    aria-label={Icon.name}
-                                  />
-                                ))}
-                              </div>
-                            </div>
-                            <a
-                              href={project.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:scale-105 transition duration-300 ease-in-out text-white font-semibold text-center shadow"
-                            >
-                              View Project
-                            </a>
-                          </div>
+                          {/* Project details content */}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -185,10 +151,6 @@ export default function PortfolioPage() {
           </section>
         </main>
       </div>
-
-      <footer className="mt-auto text-gray-500 dark:text-gray-400 text-sm text-center p-4 bg-gray-100 dark:bg-zinc-900 border-t border-gray-200 dark:border-zinc-700">
-        <p>© {new Date().getFullYear()} John Smile Mella. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

@@ -146,7 +146,7 @@ export default function CertificatesPage() {
     : sortedCertificates.filter(cert => cert.category === selectedCategory);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-zinc-900 text-gray-800 dark:text-white">
+    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-white">
       <header className="sticky top-0 z-50 bg-gray-100 dark:bg-zinc-900">
         <Navbar />
       </header>

@@ -1,6 +1,7 @@
 import "./globals.css";
 import ThemeProvider from './ThemeProvider';
 import ClientLayout from "../components/ClientLayout";
+import ThemeHydrationFix from '../components/ThemeHydrationFix';
 
 export const metadata = {
   title: "John Smile Mella | Frontend Developer & UI/UX Designer",
@@ -12,9 +13,11 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
         <ThemeProvider>
-          <ClientLayout>
-            {children}
-          </ClientLayout>
+          <ThemeHydrationFix>
+            <ClientLayout>
+              {children}
+            </ClientLayout>
+          </ThemeHydrationFix>
         </ThemeProvider>
       </body>
     </html>
