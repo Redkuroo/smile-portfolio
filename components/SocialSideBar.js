@@ -33,7 +33,7 @@ export default function SocialSideBar() {
             target="_blank"
             rel="noopener noreferrer"
             title={label}
-            className="hover:text-red-600 transition-transform duration-300 transform hover:scale-125"
+            className="hover:text-red-600 transition-transform duration-300 transform hover:scale-120"
           >
             {icon}
           </a>
